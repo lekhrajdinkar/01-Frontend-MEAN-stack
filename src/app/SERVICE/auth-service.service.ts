@@ -23,7 +23,7 @@ export class AuthService {
 
   authResp :AuthResponse;
 
-  host = 'https://tact-nodejs.herokuapp.com' ;
+  host = 'https://mean-backend-05-18-1991.herokuapp.com' ;
   //host = 'http://localhost:5000' ;
  
   constructor(
@@ -66,6 +66,35 @@ export class AuthService {
       }
     )
   }
+
+
+  //Fake Login
+  signUp(initial : string, password : string){
+
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type':  'application/json'})
+    };
+
+    const url= `${this.host}/tact2/signup` ;
+   
+     this.http.post(url,{initial,password} ,httpOptions)
+     .pipe(
+       tap((data) => 
+       {
+        alert("signed up successfully ...!!")
+        this.router.navigate(["login"]);
+      }),
+  
+     )
+     .subscribe(
+      noop,
+      (err) => {
+        //this.store.dispatch(new LoginAction({jwt: null, initial:null, login_status:'failed'}));
+        alert('sign up failed. Check error Logs');
+      }
+    )
+  }
+
 
   logout(){
     this.authResp = null; //clean up jwt 

@@ -73,4 +73,9 @@ customValidator1(control : FormControl) : any{
   return null;
 }
 
+launchSignUp(){
+  console.log('launchSignUp');
+  this.router.navigate(["signup"]);
+}
+
 }

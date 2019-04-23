@@ -1,0 +1,49 @@
+<mat-card class="login-page border">
+    <mat-card-title>Signup form</mat-card-title>
+    <mat-card-content>
+
+        
+
+
+
+
+
+        <form (ngSubmit)="loginRF()" class="login-form" autocomplete="off" novalidate [formGroup]="loginReactiveForm">
+
+
+            <div *ngIf="inProgress">
+                <app-progress-bar [message]="'sign up user...'" class="progress-comp" color='green' bgColor='green'
+                    width="1px"></app-progress-bar>
+                <mat-divider></mat-divider>
+            </div>
+
+
+            <div [formGroupName]="'credentials'" class="login-form">
+                <mat-form-field class="mt-4">
+                    <input matInput type="text" placeholder="Enter Username" [formControlName]="'username'">
+                </mat-form-field>
+              
+
+                <mat-form-field>
+                    <input matInput type="password" placeholder="Enter password" [formControlName]="'password'">
+  
+                </mat-form-field>
+
+            </div>
+
+
+
+            <mat-divider></mat-divider>
+            <div class="d-flex flex-column">
+                <button mat-raised-button color="accent" class="m-4" type="submit">Sign Up </button>
+                <button mat-raised-button color="warning" type="button" class="m-4" (click)="loginReactiveForm.reset()">Clear</button>
+            </div>
+
+            <mat-divider></mat-divider>
+
+            
+           
+        </form>
+
+    </mat-card-content>
+</mat-card>

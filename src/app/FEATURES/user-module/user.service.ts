@@ -12,7 +12,7 @@ import { LoadAllUserAction } from './user.actions';
 @Injectable()
 export class UserService {
 
-  host = 'https://tact-nodejs.herokuapp.com' ;
+  host = 'https://mean-backend-05-18-1991.herokuapp.com' ;
   //host = 'http://localhost:5000' ;
   users : User []
   constructor( private http : HttpClient

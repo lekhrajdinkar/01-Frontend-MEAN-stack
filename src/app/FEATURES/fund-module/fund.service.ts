@@ -12,7 +12,7 @@ import { UnderlyingFund } from './underlyingFund.model';
 @Injectable()
 export class FundService{
 
-  host = 'https://tact-nodejs.herokuapp.com' ;
+  host = 'https://mean-backend-05-18-1991.herokuapp.com' ;
   //host = 'http://localhost:5000' ;
 
   constructor(private http:HttpClient, private authSrv : AuthService) { }

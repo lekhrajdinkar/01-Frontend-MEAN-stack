@@ -27,15 +27,15 @@
                 <span>View Orders</span>
             </a>
 
-            <a mat-list-item routerLink="/fund-module/get-all/">
+            <!-- <a mat-list-item routerLink="/fund-module/get-all/">
                 <mat-icon>account_balance</mat-icon>
                 <span>link 2</span>
-            </a>
+            </a>  -->
 
-            <a mat-list-item routerLink="/fund-module/get-all/">
+            <!-- <a mat-list-item routerLink="/fund-module/get-all/">
                 <mat-icon>account_balance</mat-icon>
                 <span>link 3</span>
-            </a>
+            </a> -->
            
 
             <mat-divider></mat-divider>
@@ -44,10 +44,10 @@
     
 
             <mat-divider></mat-divider>
-            <button  mat-raised-button class="m-2" [routerLink]= "['rpt']">
+            <!-- <button  mat-raised-button class="m-2" [routerLink]= "['rpt']">
                     <mat-icon>insert_drive_file</mat-icon>
                     <span>Report</span>
-            </button>
+            </button> -->
             <mat-divider></mat-divider>
 
         </mat-nav-list>
@@ -72,9 +72,9 @@
             <h2 class="text-monospace"> MEAN Stack Tool</h2>
             <div class="container ml-4" *ngIf="isLoggedIn$ | async">
                 <div class="row justify-content ">
-                    <button mat-raised-button color="accent" (click)="this.router.navigate(['fundmtn'])">
-                        <mat-icon>account_balance</mat-icon>
-                        <span>Order Management</span>
+                    <button mat-raised-button color="accent" (click)="this.router.navigate(['ordermgt'])">
+                            <mat-icon>account_balance</mat-icon>
+                            <span>Order Management</span>
                     </button>
 
                     <button mat-raised-button color="accent" class="ml-4" [routerLink]= "['rpt']">

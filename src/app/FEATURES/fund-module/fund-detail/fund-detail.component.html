@@ -1,7 +1,9 @@
-{{fof_num}}
-<span *ngIf='noUFflag' class="badge badge-pill badge-light">NO UnderLying Found</span>
 
-<div class="fund">
+<div *ngIf='!isProgress' class="m-4">
+{{fof_num}}
+<span *ngIf='noUFflag' class="badge badge-pill badge-light">NO data Found</span>
+
+
 
     <mat-tab-group>
         <mat-tab [label]="[uf.num]" *ngFor="let uf of underlyingFunds"> 
@@ -18,15 +20,13 @@
     
     <mat-divider></mat-divider>
    
-        <button mat-button class="mat-raised-button mat-primary mt-4" [routerLink]="['/fund-module/get-all']">back</button>
-   
-    
-</div>
+        <!-- <button mat-button class="mat-raised-button mat-primary mt-4" [routerLink]="['/fund-module/get-all']">back</button> -->
 
+</div>
 <!-- <mat-progress-bar mode="indeterminate" *ngIf='!underlyingFunds' ></mat-progress-bar> -->
 <!-- <mat-spinner *ngIf='!underlyingFunds' class="fund-card"></mat-spinner> -->
 
-<app-progress-bar *ngIf='!underlyingFunds' class="progress-comp"></app-progress-bar>
+<app-progress-bar *ngIf='isProgress' class="progress-comp" color='blue' bgColor='blue' message='loading details...'></app-progress-bar>
 
 
     

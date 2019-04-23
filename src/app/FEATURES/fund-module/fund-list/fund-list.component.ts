@@ -17,7 +17,7 @@ export class FundListComponent implements OnInit {
   funds: Fund[];
   pageArray : number[];
   currentPage: number = 1;
-  pageSize: number = 6;
+  pageSize: number = 3;
   totalPage : number = 5; //will fix it
   //@Output() addFundCompClicked = false;
   

@@ -14,7 +14,7 @@
 
 
             <div *ngIf="inProgress">
-                <app-progress-bar [message]="'authenticating...'" class="progress-comp" bgColor="#49f232" color="blue"
+                <app-progress-bar [message]="'authenticating...'" class="progress-comp" color='green' bgColor='green'
                     width="1px"></app-progress-bar>
                 <mat-divider></mat-divider>
             </div>
@@ -39,8 +39,9 @@
 
             <mat-divider></mat-divider>
             <div class="d-flex flex-column">
-                <button mat-raised-button color="primary" class="m-4" type="submit">Login</button>
-                <button mat-raised-button color="warning" type="button" class="m-4" (click)="loginReactiveForm.reset()">Clear</button>
+                <button mat-raised-button color="primary" class="m-2" type="submit">Login</button>
+                <button mat-raised-button color="warning" type="button" class="m-2" (click)="loginReactiveForm.reset()">Clear</button>
+                <button mat-raised-button color="primary" type="button" class="m-2"  (click)="launchSignUp()">Sign up</button>
             </div>
 
             <mat-divider></mat-divider>

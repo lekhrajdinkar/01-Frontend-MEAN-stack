@@ -1,28 +1,35 @@
-<div class="fund" (click)="onSimpleClick()">
+<div  (click)="onSimpleClick()">
 
 <mat-card-header>
     <mat-card-title>
-        <p class="badge badge-warning text-wrap"> Fund Number : {{fund.num}}</p>
-        <div [@divTrigger]="clickInfo" class="m-2"></div>
+        <p class="badge badge-warning text-wrap"> Order Id : {{fund._id}}</p>
+        <div [@divTrigger]="clickInfo"></div>
     </mat-card-title>
 </mat-card-header>
 
 <!-- <img mat-card-image [src]="course.iconUrl"> -->
 
-<mat-card-content>
-        <p class="text-muted"> Abbreviation: {{fund.abbr}}</p>
-        <p class="text-muted"> created by: {{fund.created_by}}</p>
-        <p class="text-muted"> created on : {{fund.create_dt}}</p>
-        
-        <p class="text-muted"> _id : {{fund._id}}</p>
-</mat-card-content>
+<div class="row">
+    <div class="col col-9">
+        <mat-card-content>
+            <p class="text-muted">Abbreviation: {{fund.abbr}}</p>
+            <p class="text-muted">Created by: {{fund.created_by}}</p>
+     </mat-card-content>
+    </div>
 
-<mat-divider></mat-divider>
-<mat-card-actions class="fund-actions">
-    <button mat-button class="mat-raised-button mat-primary" 
-    class="view-button"
-    [routerLink]="['/fund-module/get-all', fund._id]" ><h6 class="mt-2">VIEW</h6></button>
-</mat-card-actions> 
+    <div class="col col-3">
+            <mat-card-actions>
+                    <button mat-button class="mat-raised-button mat-primary" 
+                    class="view-button"
+                    [routerLink]="['/fund-module/get-all', fund._id]" ><h6 class="mt-2">VIEW</h6></button>
+            </mat-card-actions> 
+    </div>
+</div>
+
+
+
+
+
 
 </div>
 

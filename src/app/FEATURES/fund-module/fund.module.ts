@@ -13,10 +13,11 @@ import { FundModuleRouting } from './fund.module.routing';
 import { TactCommonModule } from 'src/app/common/common.module';
 import { FofTableComponent } from './fof-table/fof-table.component';
 import { PrimeNGModule } from 'src/app/ngprime.module';
+import { OrderMgtComponent } from './order-mgt/order-mgt.component';
 
 
 @NgModule({
-  declarations: [FundComponent, FundListComponent, FundAddComponent, FundDetailComponent, FofTableComponent],
+  declarations: [FundComponent, FundListComponent, FundAddComponent, FundDetailComponent, FofTableComponent, OrderMgtComponent],
   imports: [
     CommonModule,
     MaterialModule,PrimeNGModule,

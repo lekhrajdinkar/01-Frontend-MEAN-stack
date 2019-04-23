@@ -6,7 +6,7 @@
 
 <div class="row">
   <div class="col-4">
-      <app-progress-bar *ngIf="!users" style="margin : 50% 50%"></app-progress-bar>
+      <app-progress-bar *ngIf="!users" message='loading Users...' color='green' bgColor='green'></app-progress-bar>
       <!-- <app-user-list [users]="usersHC.slice(0,3)"></app-user-list> -->
 
       <app-user-list [users]="users"></app-user-list>

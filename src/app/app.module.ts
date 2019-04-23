@@ -23,6 +23,7 @@ import { AppEffects } from './app.effects';
 import * as fromAuth from './auth/auth.reducer';
 import {   PrimeNGModule} from './ngprime.module';
 import { AboutComponent } from './common/about.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AboutComponent } from './common/about.component';
     ReportComponent,
     HomeComponent,
     FundEditComponent,
-    ErrorComponent, AboutComponent
+    ErrorComponent, AboutComponent, SignupComponent
     //PaginatorComponent
   ],
   imports: [
