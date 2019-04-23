@@ -1,0 +1,40 @@
+<div class="m-2 text text-primary text-center "> 1.2 Add Users Component (Presentational)</div>
+<mat-card class="add-page m-4">
+
+    <mat-card-title>Add New User</mat-card-title>
+
+  
+      <mat-card-content>
+          <div class="d-flex flex-column m-4">
+          <mat-form-field>
+            <input matInput type="text" placeholder="initial" name="initial" ngModel #initial>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput type="text" placeholder="name" name="name" ngModel #name>
+            </mat-form-field>
+          
+          <mat-form-field>
+            <mat-select placeholder="Select location" placeholder="loc" name="role" ngModel #loc>
+                <mat-option value="IRVINE">IRVINE</mat-option>
+                <mat-option value="LA">LA</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+              
+              <mat-select placeholder="Select Role" placeholder="role" name="role" ngModel #role>
+                  <mat-option value="IRVINE">DEVELOPER</mat-option>
+                  <mat-option value="LA">BSA</mat-option>
+                </mat-select>
+          </mat-form-field>
+          </div>
+      </mat-card-content>
+    
+      <mat-card-actions class="fund-actions">
+          <button mat-raised-button color="primary" type="submit" 
+          (click)= 'addFund(name.value, role.value, initial.value, loc.value)'>Add</button>   
+      </mat-card-actions>
+   
+
+    </mat-card>

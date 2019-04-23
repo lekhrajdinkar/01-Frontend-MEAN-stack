@@ -1,0 +1,127 @@
+<mat-sidenav-container fullscreen>
+
+    <!-- SIDE NAV -->
+    <mat-sidenav #start>
+        <mat-nav-list (click)="start.close()">
+
+            <a mat-list-item routerLink="/login" *ngIf="!(isLoggedIn$ | async)">
+                <mat-icon>face</mat-icon> <span>Login</span>
+            </a>
+
+            <a mat-list-item routerLink="/login" *ngIf="isLoggedIn$ | async" (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon> <span>Logout</span>
+            </a>
+
+            <!-- <a mat-list-item (click)="display = true">
+                <mat-icon>info</mat-icon> <span>About</span>
+            </a> -->
+            <a mat-list-item (click)="about()">
+                    <mat-icon>info</mat-icon> <span>About tool</span>
+            </a>
+
+            <mat-divider></mat-divider>
+            <p mat-list-item class="m-2 badge badge-info">sub-Module-1 EQUITY (early loaded)</p>
+
+            <a mat-list-item routerLink="/fund-module/get-all/">
+                <mat-icon>account_balance</mat-icon>
+                <span>View Orders</span>
+            </a>
+
+            <a mat-list-item routerLink="/fund-module/get-all/">
+                <mat-icon>account_balance</mat-icon>
+                <span>link 2</span>
+            </a>
+
+            <a mat-list-item routerLink="/fund-module/get-all/">
+                <mat-icon>account_balance</mat-icon>
+                <span>link 3</span>
+            </a>
+           
+
+            <mat-divider></mat-divider>
+            <p mat-list-item class="m-2 badge badge-info">sub-Module-2 Admin (lazy load)</p>
+            <a mat-list-item routerLink="/user-module/">Manage users</a>
+    
+
+            <mat-divider></mat-divider>
+            <button  mat-raised-button class="m-2" [routerLink]= "['rpt']">
+                    <mat-icon>insert_drive_file</mat-icon>
+                    <span>Report</span>
+            </button>
+            <mat-divider></mat-divider>
+
+        </mat-nav-list>
+
+    </mat-sidenav>
+
+    <!-- MAT Tool Bar -->
+    <mat-toolbar color="primary" class="sticky-top">
+
+        <!-- MAT tool bar row - 1 -->
+        <mat-toolbar-row>
+
+            <!-- hamburger -->
+            <button class="menu-button" mat-icon-button (click)="start.open('mouse')">
+                <mat-icon>menu</mat-icon>
+            </button>
+
+            <!-- title -->
+            <button mat-icon-button color="accent" routerLink= "home" *ngIf="(isLoggedIn$ | async)">
+                <mat-icon>home</mat-icon>
+            </button>
+            <h2 class="text-monospace"> MEAN Stack Tool</h2>
+            <div class="container ml-4" *ngIf="isLoggedIn$ | async">
+                <div class="row justify-content ">
+                    <button mat-raised-button color="accent" (click)="this.router.navigate(['fundmtn'])">
+                        <mat-icon>account_balance</mat-icon>
+                        <span>Order Management</span>
+                    </button>
+
+                    <button mat-raised-button color="accent" class="ml-4" [routerLink]= "['rpt']">
+                        <mat-icon>insert_drive_file</mat-icon>
+                        <span>Reports</span>
+                    </button>
+                </div>
+            </div>
+            <!-- menu option -->
+            <div class="ml-auto" >
+
+                <!-- more Option button-->
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>dashboard</mat-icon><span>Admin</span>
+                    </button>
+                    <button mat-menu-item (click)="this.router.navigate(['login'])" *ngIf="!(isLoggedIn$ | async)">
+                        <mat-icon>face</mat-icon><span>Login</span>
+                    </button>
+                    <button mat-menu-item (click)="logout()" *ngIf="(isLoggedIn$ | async)">
+                        <mat-icon>power_settings_new</mat-icon><span>Logout</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>info</mat-icon><span>About Tool</span>
+                    </button>
+                </mat-menu>
+
+            </div>
+
+        </mat-toolbar-row>
+        <!-- <mat-toolbar-row>
+                <span>Custom Toolbar</span>
+        </mat-toolbar-row> -->
+
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+
+
+</mat-sidenav-container>
+
+<p-dialog header="About Tact" [(visible)]="display" [style]="{width: '300px'}"
+[contentStyle]="{'overflow':'visible'}" [transitionOptions]="'2ms'">
+        Version : 6.0
+</p-dialog>

@@ -1,0 +1,44 @@
+<div class="m-2 text text-primary text-center "> 1.1 Users details Component (Presentational)</div>
+<mat-divider></mat-divider>
+
+<mat-card class="add-fund-card m-4">
+
+  <mat-card-title>User Details</mat-card-title>
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        index : <span class="badge badge-info" [@compBumpNoState]> {{ index}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-title>Actvity histories</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+          last login : 
+          <span class="ml-2 badge badge-success">online</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-title>Edit/delete user Details</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+          <button mat-mini-fab color="warn">delete</button>
+      </div>
+    </div>
+    
+  </mat-card-content>
+
+
+
+
+
+
+</mat-card>
