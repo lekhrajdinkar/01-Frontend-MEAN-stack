@@ -9,6 +9,7 @@ import { pipe } from '@angular/core/src/render3';
 import { TactState } from '../reducers';
 import { Store } from '@ngrx/store';
 import { LoginAction, LogoutAction } from '../auth/auth.actions';
+import { hostUrl } from '../common/util';
 
 export const UNKNOWN_USER : UserDetail = {username : 'unknown'}
 
@@ -23,8 +24,7 @@ export class AuthService {
 
   authResp :AuthResponse;
 
-  host = 'https://mean-backend-05-18-1991.herokuapp.com' ;
-  //host = 'http://localhost:5000' ;
+  host = hostUrl; 
  
   constructor(
     private router:Router, 

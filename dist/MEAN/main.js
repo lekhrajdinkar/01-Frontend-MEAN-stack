@@ -207,7 +207,7 @@ var FundAddComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".fund {\n    text-align: center;\n    max-width: 800;\n    margin: 0 auto;\n}\n\n\n.progress-comp {\n    margin: auto auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC1kZXRhaWwvZnVuZC1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGtCQUFrQjtJQUNsQixjQUFjO0lBQ2QsY0FBYztBQUNsQjs7O0FBR0E7SUFDSSxpQkFBaUI7QUFDckIiLCJmaWxlIjoic3JjL2FwcC9GRUFUVVJFUy9mdW5kLW1vZHVsZS9mdW5kLWRldGFpbC9mdW5kLWRldGFpbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZ1bmQge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXgtd2lkdGg6IDgwMDtcbiAgICBtYXJnaW46IDAgYXV0bztcbn1cblxuXG4ucHJvZ3Jlc3MtY29tcCB7XG4gICAgbWFyZ2luOiBhdXRvIGF1dG87XG59Il19 */"
+module.exports = ".progress-comp{\n    display: fixed;\n    margin: auto auto;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC1kZXRhaWwvZnVuZC1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGNBQWM7SUFDZCxpQkFBaUI7QUFDckIiLCJmaWxlIjoic3JjL2FwcC9GRUFUVVJFUy9mdW5kLW1vZHVsZS9mdW5kLWRldGFpbC9mdW5kLWRldGFpbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByb2dyZXNzLWNvbXB7XG4gICAgZGlzcGxheTogZml4ZWQ7XG4gICAgbWFyZ2luOiBhdXRvIGF1dG87XG59Il19 */"
 
 /***/ }),
 
@@ -218,7 +218,7 @@ module.exports = ".fund {\n    text-align: center;\n    max-width: 800;\n    mar
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "{{fof_num}}\n<span *ngIf='noUFflag' class=\"badge badge-pill badge-light\">NO UnderLying Found</span>\n\n<div class=\"fund\">\n\n    <mat-tab-group>\n        <mat-tab [label]=\"[uf.num]\" *ngFor=\"let uf of underlyingFunds\"> \n            <div>\n                <table class=\"table table-dark m-4\">\n                    <tr *ngFor=\"let e of (uf | keyvalue) ; even as isEven\">\n                        <td class=\"text text-left\">{{e.key| uppercase}}</td> <td class=\"text text-left\">{{e.value}}</td>\n                    </tr>\n                </table>\n            </div>\n        </mat-tab>\n    </mat-tab-group>\n    \n    \n    <mat-divider></mat-divider>\n   \n        <button mat-button class=\"mat-raised-button mat-primary mt-4\" [routerLink]=\"['/fund-module/get-all']\">back</button>\n   \n    \n</div>\n\n<!-- <mat-progress-bar mode=\"indeterminate\" *ngIf='!underlyingFunds' ></mat-progress-bar> -->\n<!-- <mat-spinner *ngIf='!underlyingFunds' class=\"fund-card\"></mat-spinner> -->\n\n<app-progress-bar *ngIf='!underlyingFunds' class=\"progress-comp\"></app-progress-bar>\n\n\n    "
+module.exports = "\n<div *ngIf='!isProgress' class=\"m-4\">\n{{fof_num}}\n<span *ngIf='noUFflag' class=\"badge badge-pill badge-light\">NO data Found</span>\n\n\n\n    <mat-tab-group>\n        <mat-tab [label]=\"[uf.num]\" *ngFor=\"let uf of underlyingFunds\"> \n            <div>\n                <table class=\"table table-dark m-4\">\n                    <tr *ngFor=\"let e of (uf | keyvalue) ; even as isEven\">\n                        <td class=\"text text-left\">{{e.key| uppercase}}</td> <td class=\"text text-left\">{{e.value}}</td>\n                    </tr>\n                </table>\n            </div>\n        </mat-tab>\n    </mat-tab-group>\n    \n    \n    <mat-divider></mat-divider>\n   \n        <!-- <button mat-button class=\"mat-raised-button mat-primary mt-4\" [routerLink]=\"['/fund-module/get-all']\">back</button> -->\n\n</div>\n<!-- <mat-progress-bar mode=\"indeterminate\" *ngIf='!underlyingFunds' ></mat-progress-bar> -->\n<!-- <mat-spinner *ngIf='!underlyingFunds' class=\"fund-card\"></mat-spinner> -->\n\n<app-progress-bar *ngIf='isProgress' class=\"progress-comp\" color='blue' bgColor='blue' message='loading details...'></app-progress-bar>\n\n\n    "
 
 /***/ }),
 
@@ -242,24 +242,38 @@ __webpack_require__.r(__webpack_exports__);
 
 var FundDetailComponent = /** @class */ (function () {
     function FundDetailComponent(fundSrv, route) {
+        var _this = this;
         this.fundSrv = fundSrv;
         this.route = route;
-        this.noUFflag = false;
+        this.noUFflag = true;
+        this.isProgress = true;
+        //1. Get Full response
+        this.getDetails = function () {
+            _this.fundSrv.getUunderLyingFunds(_this._id)
+                .subscribe(function (data) {
+                setTimeout(function () {
+                    _this.isProgress = false;
+                    _this.underlyingFunds = data;
+                    if (data.length == 0) {
+                        _this.noUFflag = true;
+                    }
+                    console.log('HTTP Response body: ', data);
+                }, 1000);
+            }, function (err) { console.log(err); });
+        };
     }
     FundDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.fof_num = this.route.snapshot.queryParams['fof_num'];
-        //1. Get Full response
-        this.fundSrv.getUunderLyingFunds(this.route.snapshot.params['_id'])
-            .subscribe(function (data) {
-            setTimeout(function () {
-                _this.underlyingFunds = data;
-                if (data.length == 0) {
-                    _this.noUFflag = true;
-                }
-                console.log('HTTP Response body: ', data);
-            }, 1000);
-        }, function (err) { console.log(err); });
+        //this.fof_num = this.route.snapshot.queryParams['fof_num'];
+        //this._id= this.route.snapshot.params['_id'];
+        console.log(this.fof_num, this._id);
+        this.getDetails();
+        this.route.params.subscribe(function (data) {
+            _this.isProgress = true;
+            _this._id = data['_id'];
+            //console.log('data', data);
+            _this.getDetails();
+        }, function (err) { return console.error(err); });
     };
     FundDetailComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -294,7 +308,7 @@ module.exports = ".fund-card {\n    margin: 20px auto;\n    max-width: 390px;\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col col-12\">\n      <div (click)=\"divClicked = !divClicked\"\n      [@divTrigger]=\"divClicked ? 'clicked' : 'default'\"></div>\n\n      <!-- <div [@divTrigger]=\"clickInfo\" class=\"m-2\"></div> -->\n      <fund-add></fund-add>\n    <!-- <fund-add (click)=\"addFundCompClicked = !addFundCompClicked\" \n    [@clickTrigger]=\"addFundCompClicked ? 'default' : 'clicked'\"></fund-add> -->\n\n    \n  </div>\n\n\n\n  <mat-divider></mat-divider>\n\n  <div *ngIf='funds' class=\"col col-12 \">\n    <div class=\"d-flex flex-wrap justify-content-around\">\n      <mat-card *ngFor=\"let fund of funds; index as i\" class=\"fund-card mat-elevation-z10\">\n        <div id=\"temp_id1\"> \n          <fund [fund]=fund [index]=i \n          (click)=\"fund.isClicked = !fund.isClicked\"\n          (click)=\"onSimpleClick()\"\n          [ngStyle]= \"{'backgroundColor' : fund.isClicked ? 'rgb(222, 231, 210)' : 'white'}\" \n          [ngClass]=\"{'ng-class-1' : fund.isClicked}\"\n          [@compBump]=\"fund.isClicked ? 'bump' : 'default' \"\n          ></fund> \n        </div>\n      </mat-card>\n    </div>\n    <mat-divider></mat-divider>\n\n    <!-- paginator -->\n    <div class=\"d-flex justify-content-around m-4 bg-dark text-white\">\n\n      <input class=\"m-4 d-inline-block\" type=\"text\" placeholder=\"page Size\" value=\"6\" \n      [ngStyle]= \"{'width' : isClickedInput ? '30px' : '40px'}\"  \n      (click)=\"isClickedInput = !isClickedInput\" \n      (dblclick)=\"doubleClickFund(pageSize)\"\n      #pageSize>\n      \n\n      <div class=\"d-flex m-1 bg-light text text-dark\">\n\n          <!-- <input id=\"currPageInp\" class=\"m-4 d-inline-block\" type=\"number\" (input)=\"changePage($event)\" value=\"currentPage\"> -->\n          <span *ngFor=\"let i of pageArray\" class=\"m-4 d-inline-block\" [@highlightPageNum] = \"currentPage == i ? 'selected' : 'unselected' \">{{i}} </span>\n          \n         \n        </div>\n\n      <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='previous(pageSize.value)' [disabled]=\"currentPage == 1 ? true: false \">Previous</button>\n      <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='next(pageSize.value)' [disabled]=\"currentPage === totalPage ? true: false\" >Next</button>\n\n    </div>\n\n    \n  </div>\n\n  <!-- <mat-spinner *ngIf='!funds' class=\"fund-card\"></mat-spinner> -->\n  <mat-divider></mat-divider>\n  <app-progress-bar *ngIf='!funds' class=\"fund-card\"></app-progress-bar>\n\n  <!-- \n\n \n   -->"
+module.exports = "\n  <div *ngIf='funds' class=\"col col-12 \">\n    <div class=\"d-flex flex-column flex-wrap justify-content-around\">\n      <mat-card *ngFor=\"let fund of funds; index as i\" class=\"fund-card mat-elevation-z10\">\n        <div> \n          <fund [fund]=fund [index]=i (click)=\"fund.isClicked = !fund.isClicked\"\n          [@compBump]=\"fund.isClicked ? 'bump' : 'default' \"\n          ></fund> \n        </div>\n      </mat-card>\n    </div>\n    <mat-divider></mat-divider>\n\n    <!-- paginator -->\n    <div class=\"d-flex justify-content-around m-4 bg-dark text-white\">\n\n      <input class=\"m-4 d-inline-block\" type=\"text\" placeholder=\"page Size\" value=\"3\" \n      [ngStyle]= \"{'width' : isClickedInput ? '30px' : '40px'}\"  \n      (click)=\"isClickedInput = !isClickedInput\" \n      (dblclick)=\"doubleClickFund(pageSize)\"\n      #pageSize>\n      \n\n      <div class=\"d-flex m-1 bg-light text text-dark\">\n\n          <!-- <input id=\"currPageInp\" class=\"m-4 d-inline-block\" type=\"number\" (input)=\"changePage($event)\" value=\"currentPage\"> -->\n          <span *ngFor=\"let i of pageArray\" class=\"m-4 d-inline-block\" [@highlightPageNum] = \"currentPage == i ? 'selected' : 'unselected' \">{{i}} </span>\n          \n         \n        </div>\n\n      <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='previous(pageSize.value)' [disabled]=\"currentPage == 1 ? true: false \">Previous</button>\n      <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='next(pageSize.value)' [disabled]=\"currentPage === totalPage ? true: false\" >Next</button>\n\n    </div>\n\n    \n  </div>\n\n  <!-- <mat-spinner *ngIf='!funds' class=\"fund-card\"></mat-spinner> -->\n  <mat-divider></mat-divider>\n  <app-progress-bar *ngIf='!funds' class=\"fund-card\"></app-progress-bar>\n\n  <!-- \n\n \n   -->"
 
 /***/ }),
 
@@ -325,7 +339,7 @@ var FundListComponent = /** @class */ (function () {
         this.srv = srv;
         this.renderer = renderer;
         this.currentPage = 1;
-        this.pageSize = 6;
+        this.pageSize = 3;
         this.totalPage = 5; //will fix it
         //=====Animation
         this.clickInfo = 'default';
@@ -402,11 +416,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _fund_list_fund_list_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fund-list/fund-list.component */ "./src/app/FEATURES/fund-module/fund-list/fund-list.component.ts");
-/* harmony import */ var _fund_add_fund_add_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fund-add/fund-add.component */ "./src/app/FEATURES/fund-module/fund-add/fund-add.component.ts");
-/* harmony import */ var _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./fund-detail/fund-detail.component */ "./src/app/FEATURES/fund-module/fund-detail/fund-detail.component.ts");
-/* harmony import */ var src_app_auth_gaurd_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/auth-gaurd.guard */ "./src/app/auth-gaurd.guard.ts");
-/* harmony import */ var _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fof-table/fof-table.component */ "./src/app/FEATURES/fund-module/fof-table/fof-table.component.ts");
+/* harmony import */ var _fund_add_fund_add_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fund-add/fund-add.component */ "./src/app/FEATURES/fund-module/fund-add/fund-add.component.ts");
+/* harmony import */ var _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fund-detail/fund-detail.component */ "./src/app/FEATURES/fund-module/fund-detail/fund-detail.component.ts");
+/* harmony import */ var src_app_auth_gaurd_guard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/auth-gaurd.guard */ "./src/app/auth-gaurd.guard.ts");
+/* harmony import */ var _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./fof-table/fof-table.component */ "./src/app/FEATURES/fund-module/fof-table/fof-table.component.ts");
+/* harmony import */ var _order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./order-mgt/order-mgt.component */ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.ts");
 
 
 
@@ -417,10 +431,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
-    { path: 'fund-module/get-all/:_id', component: _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_6__["FundDetailComponent"] },
-    { path: 'fund-module/get-all', component: _fund_list_fund_list_component__WEBPACK_IMPORTED_MODULE_4__["FundListComponent"] },
-    { path: 'fund-module/add-fund', component: _fund_add_fund_add_component__WEBPACK_IMPORTED_MODULE_5__["FundAddComponent"], canActivate: [src_app_auth_gaurd_guard__WEBPACK_IMPORTED_MODULE_7__["AuthGaurdGuard"]] },
-    { path: 'fund-module/fof', component: _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_8__["FofTableComponent"] }
+    { path: 'fund-module/get-all', component: _order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_8__["OrderMgtComponent"],
+        children: [{ path: ':_id', component: _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_5__["FundDetailComponent"] },]
+    },
+    { path: 'fund-module/add-fund', component: _fund_add_fund_add_component__WEBPACK_IMPORTED_MODULE_4__["FundAddComponent"], canActivate: [src_app_auth_gaurd_guard__WEBPACK_IMPORTED_MODULE_6__["AuthGaurdGuard"]] },
+    { path: 'fund-module/fof', component: _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_7__["FofTableComponent"] }
 ];
 var FundModuleRouting = /** @class */ (function () {
     function FundModuleRouting() {
@@ -468,6 +483,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_common_common_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/app/common/common.module */ "./src/app/common/common.module.ts");
 /* harmony import */ var _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./fof-table/fof-table.component */ "./src/app/FEATURES/fund-module/fof-table/fof-table.component.ts");
 /* harmony import */ var src_app_ngprime_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/ngprime.module */ "./src/app/ngprime.module.ts");
+/* harmony import */ var _order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./order-mgt/order-mgt.component */ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.ts");
+
 
 
 
@@ -489,7 +506,7 @@ var FundModule = /** @class */ (function () {
     }
     FundModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_fund_fund_component__WEBPACK_IMPORTED_MODULE_3__["FundComponent"], _fund_list_fund_list_component__WEBPACK_IMPORTED_MODULE_4__["FundListComponent"], _fund_add_fund_add_component__WEBPACK_IMPORTED_MODULE_9__["FundAddComponent"], _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_11__["FundDetailComponent"], _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_14__["FofTableComponent"]],
+            declarations: [_fund_fund_component__WEBPACK_IMPORTED_MODULE_3__["FundComponent"], _fund_list_fund_list_component__WEBPACK_IMPORTED_MODULE_4__["FundListComponent"], _fund_add_fund_add_component__WEBPACK_IMPORTED_MODULE_9__["FundAddComponent"], _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_11__["FundDetailComponent"], _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_14__["FofTableComponent"], _order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_16__["OrderMgtComponent"]],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 src_app_material_module__WEBPACK_IMPORTED_MODULE_5__["MaterialModule"], src_app_ngprime_module__WEBPACK_IMPORTED_MODULE_15__["PrimeNGModule"],
@@ -539,7 +556,7 @@ var FundService = /** @class */ (function () {
     function FundService(http, authSrv) {
         this.http = http;
         this.authSrv = authSrv;
-        this.host = 'https://tact-nodejs.herokuapp.com';
+        this.host = 'https://mean-backend-05-18-1991.herokuapp.com';
     }
     //1. Get full response
     FundService.prototype.getAllFunds = function (pageNumber, pageSize) {
@@ -653,7 +670,7 @@ var FundService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".fund {\n    text-align: center;\n    max-width: 390px;\n    margin: 0 auto;\n}\n\n:host{\n    display: block;\n    border: 1px solid black;\n    /* box-shadow: 10px 10px 10px grey; */\n}\n\n:host(.activate){\n    display: block;\n    border: 2px solid rgb(215, 233, 55);\n    box-shadow: 5px 5px 5px rgb(215, 233, 55);\n}\n\n:host-context(#temp_id1) /deep/ {\n    text-align: center;\n    box-shadow: 5px 5px 5px rgb(123, 214, 146);\n}\n\n.view-button{\n    width : 50%; background-color: rgb(203, 240, 70);\n    transition: all 1s;\n    -webkit-animation: moved 2s;\n            animation: moved 2s;\n    text-align: center\n  }\n\n.view-button:hover{\n    width : 70%; \n    background-color: rgb(151, 172, 79);\n  }\n\n@-webkit-keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n\n@keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC9mdW5kLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGNBQWM7QUFDbEI7O0FBRUE7SUFDSSxjQUFjO0lBQ2QsdUJBQXVCO0lBQ3ZCLHFDQUFxQztBQUN6Qzs7QUFFQTtJQUNJLGNBQWM7SUFDZCxtQ0FBbUM7SUFDbkMseUNBQXlDO0FBQzdDOztBQUVBO0lBQ0ksa0JBQWtCO0lBQ2xCLDBDQUEwQztBQUM5Qzs7QUFFQTtJQUNJLFdBQVcsRUFBRSxtQ0FBbUM7SUFDaEQsa0JBQWtCO0lBQ2xCLDJCQUFtQjtZQUFuQixtQkFBbUI7SUFDbkI7RUFDRjs7QUFFQTtJQUNFLFdBQVc7SUFDWCxtQ0FBbUM7RUFDckM7O0FBRUE7TUFDSTtZQUNNLFVBQVU7WUFDVix5Q0FBZ0M7b0JBQWhDO01BQ047TUFDQTtZQUNNLGFBQWE7WUFDYiw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtZQUNNLFVBQVU7WUFDViw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtRQUNFLFVBQVU7UUFDViw0QkFBbUI7Z0JBQW5CO0VBQ047RUFDQTs7QUFqQkE7TUFDSTtZQUNNLFVBQVU7WUFDVix5Q0FBZ0M7b0JBQWhDO01BQ047TUFDQTtZQUNNLGFBQWE7WUFDYiw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtZQUNNLFVBQVU7WUFDViw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtRQUNFLFVBQVU7UUFDViw0QkFBbUI7Z0JBQW5CO0VBQ047RUFDQSIsImZpbGUiOiJzcmMvYXBwL0ZFQVRVUkVTL2Z1bmQtbW9kdWxlL2Z1bmQvZnVuZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZ1bmQge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXgtd2lkdGg6IDM5MHB4O1xuICAgIG1hcmdpbjogMCBhdXRvO1xufVxuXG46aG9zdHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBib3JkZXI6IDFweCBzb2xpZCBibGFjaztcbiAgICAvKiBib3gtc2hhZG93OiAxMHB4IDEwcHggMTBweCBncmV5OyAqL1xufVxuXG46aG9zdCguYWN0aXZhdGUpe1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigyMTUsIDIzMywgNTUpO1xuICAgIGJveC1zaGFkb3c6IDVweCA1cHggNXB4IHJnYigyMTUsIDIzMywgNTUpO1xufVxuXG46aG9zdC1jb250ZXh0KCN0ZW1wX2lkMSkgL2RlZXAvIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgYm94LXNoYWRvdzogNXB4IDVweCA1cHggcmdiKDEyMywgMjE0LCAxNDYpO1xufVxuXG4udmlldy1idXR0b257XG4gICAgd2lkdGggOiA1MCU7IGJhY2tncm91bmQtY29sb3I6IHJnYigyMDMsIDI0MCwgNzApO1xuICAgIHRyYW5zaXRpb246IGFsbCAxcztcbiAgICBhbmltYXRpb246IG1vdmVkIDJzO1xuICAgIHRleHQtYWxpZ246IGNlbnRlclxuICB9XG5cbiAgLnZpZXctYnV0dG9uOmhvdmVye1xuICAgIHdpZHRoIDogNzAlOyBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTUxLCAxNzIsIDc5KTtcbiAgfVxuXG4gIEBrZXlmcmFtZXMgbW92ZWQge1xuICAgICAgMCV7XG4gICAgICAgICAgICBvcGFjaXR5OiAwO1xuICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDApIHNjYWxlKDEpXG4gICAgICB9XG4gICAgICA1MCV7XG4gICAgICAgICAgICBvcGFjaXR5OiAwLjUgO1xuICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDIwcHgpIHNjYWxlKDEpXG4gICAgICB9XG4gICAgICA3NSV7XG4gICAgICAgICAgICBvcGFjaXR5OiAxO1xuICAgICAgICAgICAgdHJhbnNmb3JtOiAgdHJhbnNsYXRlWCgwKSBzY2FsZSgxLjEpXG4gICAgICB9XG4gICAgICAxMDAle1xuICAgICAgICBvcGFjaXR5OiAxO1xuICAgICAgICB0cmFuc2Zvcm06ICBzY2FsZSgxKVxuICB9XG4gIH0iXX0= */"
+module.exports = ".fund {\n    text-align: center;\n    max-width: 390px;\n    margin: 0 auto;\n}\n\n:host{\n    display: block\n}\n\n/* :host(.activate){\n    display: block;\n    border: 2px solid rgb(215, 233, 55);\n    box-shadow: 5px 5px 5px rgb(215, 233, 55);\n} */\n\n:host(:hover){\n    border: 2px solid rgb(215, 233, 55);\n    padding: 10px\n}\n\n.view-button{\n    width : 50%; background-color: rgb(203, 240, 70);\n    transition: all 1s;\n    -webkit-animation: moved 2s;\n            animation: moved 2s;\n    text-align: center\n  }\n\n.view-button:hover{\n    width : 70%; \n    background-color: rgb(151, 172, 79);\n  }\n\n@-webkit-keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n\n@keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC9mdW5kLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGNBQWM7QUFDbEI7O0FBRUE7SUFDSTtBQUNKOztBQUVBOzs7O0dBSUc7O0FBRUg7SUFDSSxtQ0FBbUM7SUFDbkM7QUFDSjs7QUFFQTtJQUNJLFdBQVcsRUFBRSxtQ0FBbUM7SUFDaEQsa0JBQWtCO0lBQ2xCLDJCQUFtQjtZQUFuQixtQkFBbUI7SUFDbkI7RUFDRjs7QUFFQTtJQUNFLFdBQVc7SUFDWCxtQ0FBbUM7RUFDckM7O0FBRUE7TUFDSTtZQUNNLFVBQVU7WUFDVix5Q0FBZ0M7b0JBQWhDO01BQ047TUFDQTtZQUNNLGFBQWE7WUFDYiw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtZQUNNLFVBQVU7WUFDViw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtRQUNFLFVBQVU7UUFDViw0QkFBbUI7Z0JBQW5CO0VBQ047RUFDQTs7QUFqQkE7TUFDSTtZQUNNLFVBQVU7WUFDVix5Q0FBZ0M7b0JBQWhDO01BQ047TUFDQTtZQUNNLGFBQWE7WUFDYiw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtZQUNNLFVBQVU7WUFDViw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtRQUNFLFVBQVU7UUFDViw0QkFBbUI7Z0JBQW5CO0VBQ047RUFDQSIsImZpbGUiOiJzcmMvYXBwL0ZFQVRVUkVTL2Z1bmQtbW9kdWxlL2Z1bmQvZnVuZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZ1bmQge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXgtd2lkdGg6IDM5MHB4O1xuICAgIG1hcmdpbjogMCBhdXRvO1xufVxuXG46aG9zdHtcbiAgICBkaXNwbGF5OiBibG9ja1xufVxuXG4vKiA6aG9zdCguYWN0aXZhdGUpe1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigyMTUsIDIzMywgNTUpO1xuICAgIGJveC1zaGFkb3c6IDVweCA1cHggNXB4IHJnYigyMTUsIDIzMywgNTUpO1xufSAqL1xuXG46aG9zdCg6aG92ZXIpe1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigyMTUsIDIzMywgNTUpO1xuICAgIHBhZGRpbmc6IDEwcHhcbn1cblxuLnZpZXctYnV0dG9ue1xuICAgIHdpZHRoIDogNTAlOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjAzLCAyNDAsIDcwKTtcbiAgICB0cmFuc2l0aW9uOiBhbGwgMXM7XG4gICAgYW5pbWF0aW9uOiBtb3ZlZCAycztcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXJcbiAgfVxuXG4gIC52aWV3LWJ1dHRvbjpob3ZlcntcbiAgICB3aWR0aCA6IDcwJTsgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDE1MSwgMTcyLCA3OSk7XG4gIH1cblxuICBAa2V5ZnJhbWVzIG1vdmVkIHtcbiAgICAgIDAle1xuICAgICAgICAgICAgb3BhY2l0eTogMDtcbiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgwKSBzY2FsZSgxKVxuICAgICAgfVxuICAgICAgNTAle1xuICAgICAgICAgICAgb3BhY2l0eTogMC41IDtcbiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgyMHB4KSBzY2FsZSgxKVxuICAgICAgfVxuICAgICAgNzUle1xuICAgICAgICAgICAgb3BhY2l0eTogMTtcbiAgICAgICAgICAgIHRyYW5zZm9ybTogIHRyYW5zbGF0ZVgoMCkgc2NhbGUoMS4xKVxuICAgICAgfVxuICAgICAgMTAwJXtcbiAgICAgICAgb3BhY2l0eTogMTtcbiAgICAgICAgdHJhbnNmb3JtOiAgc2NhbGUoMSlcbiAgfVxuICB9Il19 */"
 
 /***/ }),
 
@@ -664,7 +681,7 @@ module.exports = ".fund {\n    text-align: center;\n    max-width: 390px;\n    m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"fund\" (click)=\"onSimpleClick()\">\n\n<mat-card-header>\n    <mat-card-title>\n        <p class=\"badge badge-warning text-wrap\"> Fund Number : {{fund.num}}</p>\n        <div [@divTrigger]=\"clickInfo\" class=\"m-2\"></div>\n    </mat-card-title>\n</mat-card-header>\n\n<!-- <img mat-card-image [src]=\"course.iconUrl\"> -->\n\n<mat-card-content>\n        <p class=\"text-muted\"> Abbreviation: {{fund.abbr}}</p>\n        <p class=\"text-muted\"> created by: {{fund.created_by}}</p>\n        <p class=\"text-muted\"> created on : {{fund.create_dt}}</p>\n        \n        <p class=\"text-muted\"> _id : {{fund._id}}</p>\n</mat-card-content>\n\n<mat-divider></mat-divider>\n<mat-card-actions class=\"fund-actions\">\n    <button mat-button class=\"mat-raised-button mat-primary\" \n    class=\"view-button\"\n    [routerLink]=\"['/fund-module/get-all', fund._id]\" ><h6 class=\"mt-2\">VIEW</h6></button>\n</mat-card-actions> \n\n</div>\n\n<!-- [queryParam] = \"[{fof_num: fund.num}]\" -->"
+module.exports = "<div  (click)=\"onSimpleClick()\">\n\n<mat-card-header>\n    <mat-card-title>\n        <p class=\"badge badge-warning text-wrap\"> Order Id : {{fund._id}}</p>\n        <div [@divTrigger]=\"clickInfo\"></div>\n    </mat-card-title>\n</mat-card-header>\n\n<!-- <img mat-card-image [src]=\"course.iconUrl\"> -->\n\n<div class=\"row\">\n    <div class=\"col col-9\">\n        <mat-card-content>\n            <p class=\"text-muted\">Abbreviation: {{fund.abbr}}</p>\n            <p class=\"text-muted\">Created by: {{fund.created_by}}</p>\n     </mat-card-content>\n    </div>\n\n    <div class=\"col col-3\">\n            <mat-card-actions>\n                    <button mat-button class=\"mat-raised-button mat-primary\" \n                    class=\"view-button\"\n                    [routerLink]=\"['/fund-module/get-all', fund._id]\" ><h6 class=\"mt-2\">VIEW</h6></button>\n            </mat-card-actions> \n    </div>\n</div>\n\n\n\n\n\n\n</div>\n\n<!-- [queryParam] = \"[{fof_num: fund.num}]\" -->"
 
 /***/ }),
 
@@ -717,6 +734,62 @@ var FundComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], FundComponent);
     return FundComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.css":
+/*!************************************************************************!*\
+  !*** ./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.css ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ":host{\n    display : block;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvb3JkZXItbWd0L29yZGVyLW1ndC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQiIsImZpbGUiOiJzcmMvYXBwL0ZFQVRVUkVTL2Z1bmQtbW9kdWxlL29yZGVyLW1ndC9vcmRlci1tZ3QuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0e1xuICAgIGRpc3BsYXkgOiBibG9jaztcbn0iXX0= */"
+
+/***/ }),
+
+/***/ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.html":
+/*!*************************************************************************!*\
+  !*** ./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.html ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"text text-primary text-center \"> Order Parent Component</div>\n<mat-divider></mat-divider>\n\n<div class=\"row\">\n  <div class=\"col-6\">\n      <app-fund-list></app-fund-list>\n  </div>\n\n  <div class=\"col-6\">\n    <div class=\"text text-primary text-center \"> Please Select Order for Details</div>\n    <router-outlet class=\"ml-auto mr-auto\"></router-outlet>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.ts":
+/*!***********************************************************************!*\
+  !*** ./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.ts ***!
+  \***********************************************************************/
+/*! exports provided: OrderMgtComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrderMgtComponent", function() { return OrderMgtComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var OrderMgtComponent = /** @class */ (function () {
+    function OrderMgtComponent() {
+    }
+    OrderMgtComponent.prototype.ngOnInit = function () {
+    };
+    OrderMgtComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-order-mgt',
+            template: __webpack_require__(/*! ./order-mgt.component.html */ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.html"),
+            styles: [__webpack_require__(/*! ./order-mgt.component.css */ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], OrderMgtComponent);
+    return OrderMgtComponent;
 }());
 
 
@@ -786,7 +859,7 @@ var AuthService = /** @class */ (function () {
         //own observable
         this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](UNKNOWN_USER); //its private ***
         this.user$ = this.subject.asObservable();
-        this.host = 'https://tact-nodejs.herokuapp.com';
+        this.host = 'https://mean-backend-05-18-1991.herokuapp.com';
     }
     //Fake Login
     AuthService.prototype.authorize = function (initial, password) {
@@ -809,6 +882,24 @@ var AuthService = /** @class */ (function () {
             .subscribe(rxjs__WEBPACK_IMPORTED_MODULE_2__["noop"], function (err) {
             //this.store.dispatch(new LoginAction({jwt: null, initial:null, login_status:'failed'}));
             alert('login failed. Check error Logs');
+            _this.subject.next(UNKNOWN_USER);
+        });
+    };
+    //Fake Login
+    AuthService.prototype.signUp = function (initial, password) {
+        var _this = this;
+        var httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpHeaders"]({ 'Content-Type': 'application/json' })
+        };
+        var url = this.host + "/tact2/signup";
+        this.http.post(url, { initial: initial, password: password }, httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (data) {
+            alert("signed up successfully ...!!");
+            _this.router.navigate(["login"]);
+        }))
+            .subscribe(rxjs__WEBPACK_IMPORTED_MODULE_2__["noop"], function (err) {
+            //this.store.dispatch(new LoginAction({jwt: null, initial:null, login_status:'failed'}));
+            alert('sign up failed. Check error Logs');
         });
     };
     AuthService.prototype.logout = function () {
@@ -867,10 +958,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth/login/login.component */ "./src/app/auth/login/login.component.ts");
-/* harmony import */ var _home_home_home_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home/home/home.component */ "./src/app/home/home/home.component.ts");
-/* harmony import */ var _home_fund_maintenance_fund_maintenance_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/fund-maintenance/fund-maintenance.component */ "./src/app/home/fund-maintenance/fund-maintenance.component.ts");
-/* harmony import */ var _home_report_report_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home/report/report.component */ "./src/app/home/report/report.component.ts");
-/* harmony import */ var _error_error_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./error/error.component */ "./src/app/error/error.component.ts");
+/* harmony import */ var _home_fund_maintenance_fund_maintenance_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./home/fund-maintenance/fund-maintenance.component */ "./src/app/home/fund-maintenance/fund-maintenance.component.ts");
+/* harmony import */ var _home_report_report_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./home/report/report.component */ "./src/app/home/report/report.component.ts");
+/* harmony import */ var _error_error_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./error/error.component */ "./src/app/error/error.component.ts");
+/* harmony import */ var _FEATURES_fund_module_order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FEATURES/fund-module/order-mgt/order-mgt.component */ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.ts");
+/* harmony import */ var _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth/signup/signup.component */ "./src/app/auth/signup/signup.component.ts");
+
 
 
 
@@ -882,12 +975,14 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     { path: '', component: _auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'login', component: _auth_login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
+    { path: 'signup', component: _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_8__["SignupComponent"] },
     //old routes
-    { path: 'home', component: _home_home_home_component__WEBPACK_IMPORTED_MODULE_4__["HomeComponent"] },
-    { path: 'fundmtn', component: _home_fund_maintenance_fund_maintenance_component__WEBPACK_IMPORTED_MODULE_5__["FundMaintenanceComponent"] },
-    { path: 'rpt', component: _home_report_report_component__WEBPACK_IMPORTED_MODULE_6__["ReportComponent"] },
+    { path: 'home', component: _FEATURES_fund_module_order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_7__["OrderMgtComponent"] },
+    { path: 'fundmtn', component: _home_fund_maintenance_fund_maintenance_component__WEBPACK_IMPORTED_MODULE_4__["FundMaintenanceComponent"] },
+    { path: 'ordermgt', component: _FEATURES_fund_module_order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_7__["OrderMgtComponent"] },
+    { path: 'rpt', component: _home_report_report_component__WEBPACK_IMPORTED_MODULE_5__["ReportComponent"] },
     { path: 'user-module', loadChildren: './FEATURES/user-module/user.module#UserModule' },
-    { path: '**', component: _error_error_component__WEBPACK_IMPORTED_MODULE_7__["ErrorComponent"] } //no match > login 
+    { path: '**', component: _error_error_component__WEBPACK_IMPORTED_MODULE_6__["ErrorComponent"] } //no match > login 
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -923,7 +1018,7 @@ module.exports = "mat-sidenav {\n    width: 300px;\n}\n\nbutton{\n    outline-st
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container fullscreen>\n\n    <!-- SIDE NAV -->\n    <mat-sidenav #start>\n        <mat-nav-list (click)=\"start.close()\">\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"!(isLoggedIn$ | async)\">\n                <mat-icon>face</mat-icon> <span>Login</span>\n            </a>\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"isLoggedIn$ | async\" (click)=\"logout()\">\n                <mat-icon>power_settings_new</mat-icon> <span>Logout</span>\n            </a>\n\n            <!-- <a mat-list-item (click)=\"display = true\">\n                <mat-icon>info</mat-icon> <span>About</span>\n            </a> -->\n            <a mat-list-item (click)=\"about()\">\n                    <mat-icon>info</mat-icon> <span>About tact</span>\n            </a>\n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\"> funds Module - early loaded </p>\n\n            <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>Fund Maintenance</span></a>\n            <!-- <a mat-list-item  routerLink=\"/fund-module/add-fund/\">fund-module/add-fund</a> -->\n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\"> Users Module - lazy load </p>\n            <a mat-list-item routerLink=\"/user-module/\">View Users</a>\n            <!-- <a mat-list-item routerLink=\"/user-module/org-chart\">Org Chart</a> -->\n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\"> FOF </p>\n            <a mat-list-item routerLink=\"/fund-module/fof\">View FOF</a>\n\n            <!-- <mat-divider></mat-divider>\n            <button mat-raised-button  class=\"m-2\" (click)=\"this.router.navigate(['fundmtn'])\">\n                    <mat-icon>account_balance</mat-icon>\n                    <span>Fund Maintenance</span>\n            </button> -->\n\n            <mat-divider></mat-divider>\n            <button  mat-raised-button class=\"m-2\" [routerLink]= \"['rpt']\">\n                    <mat-icon>insert_drive_file</mat-icon>\n                    <span>Report</span>\n            </button>\n            <mat-divider></mat-divider>\n\n        </mat-nav-list>\n\n    </mat-sidenav>\n\n    <!-- MAT Tool Bar -->\n    <mat-toolbar color=\"primary\" class=\"sticky-top\">\n\n        <!-- MAT tool bar row - 1 -->\n        <mat-toolbar-row>\n\n            <!-- hamburger -->\n            <button class=\"menu-button\" mat-icon-button (click)=\"start.open('mouse')\">\n                <mat-icon>menu</mat-icon>\n            </button>\n\n            <!-- title -->\n            <button mat-icon-button color=\"accent\" routerLink= \"home\" *ngIf=\"(isLoggedIn$ | async)\">\n                <mat-icon>home</mat-icon>\n            </button>\n            <h2 class=\"text-monospace\"> Fund Allocation & Calculation Tool</h2>\n            <div class=\"container ml-4\" *ngIf=\"isLoggedIn$ | async\">\n                <div class=\"row justify-content \">\n                    <button mat-raised-button color=\"accent\" (click)=\"this.router.navigate(['fundmtn'])\">\n                        <mat-icon>account_balance</mat-icon>\n                        <span>Fund Maintenance</span>\n                    </button>\n\n                    <button mat-raised-button color=\"accent\" class=\"ml-4\" [routerLink]= \"['rpt']\">\n                        <mat-icon>insert_drive_file</mat-icon>\n                        <span>Report</span>\n                    </button>\n                </div>\n            </div>\n            <!-- menu option -->\n            <div class=\"ml-auto\" >\n\n                <!-- more Option button-->\n                <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n                    <mat-icon>more_vert</mat-icon>\n                </button>\n\n                <mat-menu #menu=\"matMenu\">\n                    <button mat-menu-item>\n                        <mat-icon>dashboard</mat-icon><span>Admin</span>\n                    </button>\n                    <button mat-menu-item (click)=\"this.router.navigate(['login'])\" *ngIf=\"!(isLoggedIn$ | async)\">\n                        <mat-icon>face</mat-icon><span>Login</span>\n                    </button>\n                    <button mat-menu-item (click)=\"logout()\" *ngIf=\"(isLoggedIn$ | async)\">\n                        <mat-icon>power_settings_new</mat-icon><span>Logout</span>\n                    </button>\n                    <button mat-menu-item>\n                        <mat-icon>info</mat-icon><span>About TACT</span>\n                    </button>\n                </mat-menu>\n\n            </div>\n\n        </mat-toolbar-row>\n        <!-- <mat-toolbar-row>\n                <span>Custom Toolbar</span>\n        </mat-toolbar-row> -->\n\n    </mat-toolbar>\n\n    <router-outlet></router-outlet>\n\n\n\n</mat-sidenav-container>\n\n<p-dialog header=\"About Tact\" [(visible)]=\"display\" [style]=\"{width: '300px'}\"\n[contentStyle]=\"{'overflow':'visible'}\" [transitionOptions]=\"'2ms'\">\n        Version : 6.0\n</p-dialog>"
+module.exports = "<mat-sidenav-container fullscreen>\n\n    <!-- SIDE NAV -->\n    <mat-sidenav #start>\n        <mat-nav-list (click)=\"start.close()\">\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"!(isLoggedIn$ | async)\">\n                <mat-icon>face</mat-icon> <span>Login</span>\n            </a>\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"isLoggedIn$ | async\" (click)=\"logout()\">\n                <mat-icon>power_settings_new</mat-icon> <span>Logout</span>\n            </a>\n\n            <!-- <a mat-list-item (click)=\"display = true\">\n                <mat-icon>info</mat-icon> <span>About</span>\n            </a> -->\n            <a mat-list-item (click)=\"about()\">\n                    <mat-icon>info</mat-icon> <span>About tool</span>\n            </a>\n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\">sub-Module-1 EQUITY (early loaded)</p>\n\n            <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>View Orders</span>\n            </a>\n\n            <!-- <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>link 2</span>\n            </a>  -->\n\n            <!-- <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>link 3</span>\n            </a> -->\n           \n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\">sub-Module-2 Admin (lazy load)</p>\n            <a mat-list-item routerLink=\"/user-module/\">Manage users</a>\n    \n\n            <mat-divider></mat-divider>\n            <!-- <button  mat-raised-button class=\"m-2\" [routerLink]= \"['rpt']\">\n                    <mat-icon>insert_drive_file</mat-icon>\n                    <span>Report</span>\n            </button> -->\n            <mat-divider></mat-divider>\n\n        </mat-nav-list>\n\n    </mat-sidenav>\n\n    <!-- MAT Tool Bar -->\n    <mat-toolbar color=\"primary\" class=\"sticky-top\">\n\n        <!-- MAT tool bar row - 1 -->\n        <mat-toolbar-row>\n\n            <!-- hamburger -->\n            <button class=\"menu-button\" mat-icon-button (click)=\"start.open('mouse')\">\n                <mat-icon>menu</mat-icon>\n            </button>\n\n            <!-- title -->\n            <button mat-icon-button color=\"accent\" routerLink= \"home\" *ngIf=\"(isLoggedIn$ | async)\">\n                <mat-icon>home</mat-icon>\n            </button>\n            <h2 class=\"text-monospace\"> MEAN Stack Tool</h2>\n            <div class=\"container ml-4\" *ngIf=\"isLoggedIn$ | async\">\n                <div class=\"row justify-content \">\n                    <button mat-raised-button color=\"accent\" (click)=\"this.router.navigate(['ordermgt'])\">\n                            <mat-icon>account_balance</mat-icon>\n                            <span>Order Management</span>\n                    </button>\n\n                    <button mat-raised-button color=\"accent\" class=\"ml-4\" [routerLink]= \"['rpt']\">\n                        <mat-icon>insert_drive_file</mat-icon>\n                        <span>Reports</span>\n                    </button>\n                </div>\n            </div>\n            <!-- menu option -->\n            <div class=\"ml-auto\" >\n\n                <!-- more Option button-->\n                <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n                    <mat-icon>more_vert</mat-icon>\n                </button>\n\n                <mat-menu #menu=\"matMenu\">\n                    <button mat-menu-item>\n                        <mat-icon>dashboard</mat-icon><span>Admin</span>\n                    </button>\n                    <button mat-menu-item (click)=\"this.router.navigate(['login'])\" *ngIf=\"!(isLoggedIn$ | async)\">\n                        <mat-icon>face</mat-icon><span>Login</span>\n                    </button>\n                    <button mat-menu-item (click)=\"logout()\" *ngIf=\"(isLoggedIn$ | async)\">\n                        <mat-icon>power_settings_new</mat-icon><span>Logout</span>\n                    </button>\n                    <button mat-menu-item>\n                        <mat-icon>info</mat-icon><span>About Tool</span>\n                    </button>\n                </mat-menu>\n\n            </div>\n\n        </mat-toolbar-row>\n        <!-- <mat-toolbar-row>\n                <span>Custom Toolbar</span>\n        </mat-toolbar-row> -->\n\n    </mat-toolbar>\n\n    <router-outlet></router-outlet>\n\n\n\n</mat-sidenav-container>\n\n<p-dialog header=\"About Tact\" [(visible)]=\"display\" [style]=\"{width: '300px'}\"\n[contentStyle]=\"{'overflow':'visible'}\" [transitionOptions]=\"'2ms'\">\n        Version : 6.0\n</p-dialog>"
 
 /***/ }),
 
@@ -1078,6 +1173,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth_auth_reducer__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./auth/auth.reducer */ "./src/app/auth/auth.reducer.ts");
 /* harmony import */ var _ngprime_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./ngprime.module */ "./src/app/ngprime.module.ts");
 /* harmony import */ var _common_about_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./common/about.component */ "./src/app/common/about.component.ts");
+/* harmony import */ var _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./auth/signup/signup.component */ "./src/app/auth/signup/signup.component.ts");
 
 
 
@@ -1103,6 +1199,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -1115,7 +1212,7 @@ var AppModule = /** @class */ (function () {
                 _home_report_report_component__WEBPACK_IMPORTED_MODULE_10__["ReportComponent"],
                 _home_home_home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"],
                 _home_fund_maintenance_fund_edit_fund_edit_component__WEBPACK_IMPORTED_MODULE_12__["FundEditComponent"],
-                _error_error_component__WEBPACK_IMPORTED_MODULE_14__["ErrorComponent"], _common_about_component__WEBPACK_IMPORTED_MODULE_24__["AboutComponent"]
+                _error_error_component__WEBPACK_IMPORTED_MODULE_14__["ErrorComponent"], _common_about_component__WEBPACK_IMPORTED_MODULE_24__["AboutComponent"], _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_25__["SignupComponent"]
                 //PaginatorComponent
             ],
             imports: [
@@ -1281,7 +1378,7 @@ function authReducer(state, action) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"login-page border b-4 border-primary\">\n    <mat-card-title>Login</mat-card-title>\n    <mat-card-content>\n\n        <p>\n            Welcome to the Fund Allocation and calculation Tool. This Application is for authorized user only.\n            Activity in the system is tracked.\n        </p>\n\n        <mat-divider></mat-divider>\n\n        <form (ngSubmit)=\"loginRF()\" class=\"login-form\" autocomplete=\"off\" novalidate [formGroup]=\"loginReactiveForm\">\n\n\n            <div *ngIf=\"inProgress\">\n                <app-progress-bar [message]=\"'authenticating...'\" class=\"progress-comp\" bgColor=\"#49f232\" color=\"blue\"\n                    width=\"1px\"></app-progress-bar>\n                <mat-divider></mat-divider>\n            </div>\n\n\n            <div [formGroupName]=\"'credentials'\" class=\"login-form\">\n                <mat-form-field class=\"mt-4\">\n                    <input matInput type=\"text\" placeholder=\"Enter Username\" [formControlName]=\"'username'\">\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.username').errors\">\n                    This name is invalid</span>\n\n                <mat-form-field>\n                    <input matInput type=\"password\" placeholder=\"Enter password\" [formControlName]=\"'password'\">\n                    <!-- <mat-icon matSuffix (click)=\"hide = !hide\">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.password').errors\">\n                        invalid password</span>\n            </div>\n\n            <span *ngFor=\"let loc of locations\">\n                <input type=\"radio\" [formControlName]=\"'location'\" [value]=\"loc\"> {{loc}}\n            </span>\n\n\n\n            <mat-divider></mat-divider>\n            <div class=\"d-flex flex-row ml-auto mr-auto\">\n                <button mat-raised-button color=\"primary\" class=\"m-4\" type=\"submit\">Login</button>\n                <button mat-raised-button color=\"warning\" type=\"button\" class=\"m-4\" (click)=\"loginReactiveForm.reset()\">Clear</button>\n            </div>\n\n            <mat-divider></mat-divider>\n\n            Dev mode :\n\n            <div class=\"d-flex flex-row m-2\">\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"setdefaultRF()\">auto-fill</button>\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"patchRF()\">patch</button>\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"addMoreFeilds()\">add Feilds</button>\n            </div>\n            <!-- formArray -->\n            <div formArrayName=\"more-feilds\" class=\"d-flex flex-row flex-wrap\">\n                <div *ngFor=\"let feild of loginReactiveForm.get('more-feilds').controls; let i = index\">\n                    <label for=\"i\">New FormControl  : {{i}} </label>\n                    <input placeholder=\"Enter SomeThing\" type=\"text\" [formControlName]=\"i\" class=\"m-2\">\n                    \n                    <mat-divider></mat-divider>\n                </div>\n                \n            </div>\n        </form>\n\n    </mat-card-content>\n</mat-card>"
+module.exports = "<mat-card class=\"login-page border\">\n    <mat-card-title>Login</mat-card-title>\n    <mat-card-content>\n\n        \n            <h5>Welcome to the MEAN Stack Tool</h5> \n            <p>This Application is for authorized user only.\n            Activity in the system is tracked.\n        </p>\n\n        <mat-divider></mat-divider>\n\n        <form (ngSubmit)=\"loginRF()\" class=\"login-form\" autocomplete=\"off\" novalidate [formGroup]=\"loginReactiveForm\">\n\n\n            <div *ngIf=\"inProgress\">\n                <app-progress-bar [message]=\"'authenticating...'\" class=\"progress-comp\" color='green' bgColor='green'\n                    width=\"1px\"></app-progress-bar>\n                <mat-divider></mat-divider>\n            </div>\n\n\n            <div [formGroupName]=\"'credentials'\" class=\"login-form\">\n                <mat-form-field class=\"mt-4\">\n                    <input matInput type=\"text\" placeholder=\"Enter Username\" [formControlName]=\"'username'\">\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.username').errors\">\n                    This name is invalid</span>\n\n                <mat-form-field>\n                    <input matInput type=\"password\" placeholder=\"Enter password\" [formControlName]=\"'password'\">\n                    <!-- <mat-icon matSuffix (click)=\"hide = !hide\">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.password').errors\">\n                        invalid password</span>\n            </div>\n\n\n\n            <mat-divider></mat-divider>\n            <div class=\"d-flex flex-column\">\n                <button mat-raised-button color=\"primary\" class=\"m-2\" type=\"submit\">Login</button>\n                <button mat-raised-button color=\"warning\" type=\"button\" class=\"m-2\" (click)=\"loginReactiveForm.reset()\">Clear</button>\n                <button mat-raised-button color=\"primary\" type=\"button\" class=\"m-2\"  (click)=\"launchSignUp()\">Sign up</button>\n            </div>\n\n            <mat-divider></mat-divider>\n\n            Dev mode :\n\n            <div class=\"d-flex flex-row\">\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"setdefaultRF()\">auto-fill</button>\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"addMoreFeilds()\">add Feilds</button>\n            </div>\n           \n        </form>\n\n    </mat-card-content>\n</mat-card>"
 
 /***/ }),
 
@@ -1292,7 +1389,7 @@ module.exports = "<mat-card class=\"login-page border b-4 border-primary\">\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".login-page {\n    max-width: 450px;\n    margin: 50px auto 0 auto;\n  }\n  \n  .login-form {\n    display: flex;\n    flex-direction: column;\n  }\n  \n  :host{\n    display : block;\n  }\n  \n  /* .ng-touched .ng-invalid{\n    border: 1px solid red\n  } */\n  \n  /* .ng-invalid{\n    border: 1px solid rgb(214, 76, 76)\n  } */\n  \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXV0aC9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZ0JBQWdCO0lBQ2hCLHdCQUF3QjtFQUMxQjs7RUFFQTtJQUNFLGFBQWE7SUFDYixzQkFBc0I7RUFDeEI7O0VBRUE7SUFDRSxlQUFlO0VBQ2pCOztFQUlBOztLQUVHOztFQUVIOztLQUVHIiwiZmlsZSI6InNyYy9hcHAvYXV0aC9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvZ2luLXBhZ2Uge1xuICAgIG1heC13aWR0aDogNDUwcHg7XG4gICAgbWFyZ2luOiA1MHB4IGF1dG8gMCBhdXRvO1xuICB9XG4gIFxuICAubG9naW4tZm9ybSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICB9XG5cbiAgOmhvc3R7XG4gICAgZGlzcGxheSA6IGJsb2NrO1xuICB9XG5cblxuXG4gIC8qIC5uZy10b3VjaGVkIC5uZy1pbnZhbGlke1xuICAgIGJvcmRlcjogMXB4IHNvbGlkIHJlZFxuICB9ICovXG5cbiAgLyogLm5nLWludmFsaWR7XG4gICAgYm9yZGVyOiAxcHggc29saWQgcmdiKDIxNCwgNzYsIDc2KVxuICB9ICovXG4gICJdfQ== */"
+module.exports = ".login-page {\n    max-width: 350px;\n    margin: 50px auto 0 auto;\n  }\n  \n  .login-form {\n    display: flex;\n    flex-direction: column;\n  }\n  \n  :host{\n    display : block;\n  }\n  \n  /* .ng-touched .ng-invalid{\n    border: 1px solid red\n  } */\n  \n  /* .ng-invalid{\n    border: 1px solid rgb(214, 76, 76)\n  } */\n  \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXV0aC9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZ0JBQWdCO0lBQ2hCLHdCQUF3QjtFQUMxQjs7RUFFQTtJQUNFLGFBQWE7SUFDYixzQkFBc0I7RUFDeEI7O0VBRUE7SUFDRSxlQUFlO0VBQ2pCOztFQUlBOztLQUVHOztFQUVIOztLQUVHIiwiZmlsZSI6InNyYy9hcHAvYXV0aC9sb2dpbi9sb2dpbi5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvZ2luLXBhZ2Uge1xuICAgIG1heC13aWR0aDogMzUwcHg7XG4gICAgbWFyZ2luOiA1MHB4IGF1dG8gMCBhdXRvO1xuICB9XG4gIFxuICAubG9naW4tZm9ybSB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xuICB9XG5cbiAgOmhvc3R7XG4gICAgZGlzcGxheSA6IGJsb2NrO1xuICB9XG5cblxuXG4gIC8qIC5uZy10b3VjaGVkIC5uZy1pbnZhbGlke1xuICAgIGJvcmRlcjogMXB4IHNvbGlkIHJlZFxuICB9ICovXG5cbiAgLyogLm5nLWludmFsaWR7XG4gICAgYm9yZGVyOiAxcHggc29saWQgcmdiKDIxNCwgNzYsIDc2KVxuICB9ICovXG4gICJdfQ== */"
 
 /***/ }),
 
@@ -1323,65 +1420,36 @@ var LoginComponent = /** @class */ (function () {
         this.router = router;
         this.authSrv = authSrv;
         this.routingAminTriggerEnterLeft = true;
-        this.locations = ['IRV', 'HRO'];
         this.inProgress = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        var _this = this;
         console.log(this.loginForm);
+        this.authSrv.user$.subscribe(function (data) {
+            if (data.username != 'unknown') {
+                console.log(data);
+                _this.inProgress = true;
+            }
+            else
+                _this.inProgress = false;
+        });
         //RF --> set defualtt  and validator (sync, asyn)
         this.loginReactiveForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
             'credentials': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
-                'username': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("INYLBD4", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(6), this.customValidator1.bind(this)]),
-                'password': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(6), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(8)], this.customValidator2.bind(this))
-            }),
-            'location': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("IRV", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
-            'more-feilds': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormArray"]([]) //Form Array - initially blank
+                'username': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("lekhrajDinkar", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(6), this.customValidator1.bind(this)]),
+                'password': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(6), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(16)])
+            })
         });
         console.log(this.loginReactiveForm);
     };
-    LoginComponent.prototype.loginTD = function () {
-        this.inProgress = true;
-        console.log(this.loginGroup);
-        //this.authSrv.authorize(this.loginForm.value.username, this.loginForm.value.password);
-        this.authSrv.authorize(this.loginGroup.value.username, this.loginGroup.value.password);
-    };
-    LoginComponent.prototype.setdefaultTD = function () {
-        //setting default values to form
-        this.loginForm.setValue({
-            lgroup: {
-                username: "INYLBD", password: '123456', location: 'IRV'
-            }
-        });
-    };
-    LoginComponent.prototype.patchTD = function () {
-        //setting default values to form
-        this.loginForm.form.patchValue({
-            lgroup: {
-                username: "INYLBD", location: 'IRV'
-            }
-        });
-    };
     LoginComponent.prototype.loginRF = function () {
         this.inProgress = true;
-        //this.authSrv.authorize(this.loginReactiveForm.credentials.value.username, this.loginReactiveForm.value.password);
-        //this.authSrv.authorize(this.loginReactiveForm.value.username, this.loginReactiveForm.value.password);
         this.authSrv.authorize(this.loginReactiveForm.get('credentials.username').value, this.loginReactiveForm.get('credentials.password').value);
     };
     LoginComponent.prototype.setdefaultRF = function () {
         this.loginReactiveForm.setValue({
-            'credentials': { 'username': "INYLBD", 'password': '123456' },
-            'location': 'IRV',
-            'more-feilds': { undefined: undefined } //need to fix it
+            'credentials': { 'username': "lekhrajdinkar", 'password': '123456' }
         });
-    };
-    LoginComponent.prototype.patchRF = function () {
-        this.loginReactiveForm.patchValue({
-            'location': 'IRV'
-        });
-    };
-    LoginComponent.prototype.addMoreFeilds = function () {
-        var control = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
-        this.loginReactiveForm.get('more-feilds').push(control);
     };
     //Sync
     LoginComponent.prototype.customValidator1 = function (control) {
@@ -1390,19 +1458,9 @@ var LoginComponent = /** @class */ (function () {
         }
         return null;
     };
-    //Async
-    LoginComponent.prototype.customValidator2 = function (control) {
-        var p = new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                console.log('validating... password : ', control.value);
-                if (control.value == '1234567') {
-                    resolve({ 'asynCustomValidator': true });
-                }
-                else
-                    resolve(null);
-            }, 3000);
-        });
-        return p;
+    LoginComponent.prototype.launchSignUp = function () {
+        console.log('launchSignUp');
+        this.router.navigate(["signup"]);
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('loginForm'),
@@ -1426,6 +1484,97 @@ var LoginComponent = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], LoginComponent);
     return LoginComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/auth/signup/signup.component.css":
+/*!**************************************************!*\
+  !*** ./src/app/auth/signup/signup.component.css ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".login-page {\n    max-width: 350px;\n    margin: 50px auto 0 auto;\n  }\n  \n  .login-form {\n    display: flex;\n    flex-direction: column;\n  }\n  \n  :host{\n    display : block;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXV0aC9zaWdudXAvc2lnbnVwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxnQkFBZ0I7SUFDaEIsd0JBQXdCO0VBQzFCOztFQUVBO0lBQ0UsYUFBYTtJQUNiLHNCQUFzQjtFQUN4Qjs7RUFFQTtJQUNFLGVBQWU7RUFDakIiLCJmaWxlIjoic3JjL2FwcC9hdXRoL3NpZ251cC9zaWdudXAuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5sb2dpbi1wYWdlIHtcbiAgICBtYXgtd2lkdGg6IDM1MHB4O1xuICAgIG1hcmdpbjogNTBweCBhdXRvIDAgYXV0bztcbiAgfVxuICBcbiAgLmxvZ2luLWZvcm0ge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgfVxuXG4gIDpob3N0e1xuICAgIGRpc3BsYXkgOiBibG9jaztcbiAgfSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/auth/signup/signup.component.html":
+/*!***************************************************!*\
+  !*** ./src/app/auth/signup/signup.component.html ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<mat-card class=\"login-page border\">\n    <mat-card-title>Signup form</mat-card-title>\n    <mat-card-content>\n\n        \n\n\n\n\n\n        <form (ngSubmit)=\"loginRF()\" class=\"login-form\" autocomplete=\"off\" novalidate [formGroup]=\"loginReactiveForm\">\n\n\n            <div *ngIf=\"inProgress\">\n                <app-progress-bar [message]=\"'sign up user...'\" class=\"progress-comp\" color='green' bgColor='green'\n                    width=\"1px\"></app-progress-bar>\n                <mat-divider></mat-divider>\n            </div>\n\n\n            <div [formGroupName]=\"'credentials'\" class=\"login-form\">\n                <mat-form-field class=\"mt-4\">\n                    <input matInput type=\"text\" placeholder=\"Enter Username\" [formControlName]=\"'username'\">\n                </mat-form-field>\n              \n\n                <mat-form-field>\n                    <input matInput type=\"password\" placeholder=\"Enter password\" [formControlName]=\"'password'\">\n  \n                </mat-form-field>\n\n            </div>\n\n\n\n            <mat-divider></mat-divider>\n            <div class=\"d-flex flex-column\">\n                <button mat-raised-button color=\"accent\" class=\"m-4\" type=\"submit\">Sign Up </button>\n                <button mat-raised-button color=\"warning\" type=\"button\" class=\"m-4\" (click)=\"loginReactiveForm.reset()\">Clear</button>\n            </div>\n\n            <mat-divider></mat-divider>\n\n            \n           \n        </form>\n\n    </mat-card-content>\n</mat-card>"
+
+/***/ }),
+
+/***/ "./src/app/auth/signup/signup.component.ts":
+/*!*************************************************!*\
+  !*** ./src/app/auth/signup/signup.component.ts ***!
+  \*************************************************/
+/*! exports provided: SignupComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SignupComponent", function() { return SignupComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/SERVICE/auth-service.service */ "./src/app/SERVICE/auth-service.service.ts");
+/* harmony import */ var src_app_common_tact_anim_1__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/common/tact.anim-1 */ "./src/app/common/tact.anim-1.ts");
+
+
+
+
+
+
+var SignupComponent = /** @class */ (function () {
+    function SignupComponent(router, authSrv) {
+        this.router = router;
+        this.authSrv = authSrv;
+        this.routingAminTriggerEnterLeft = true;
+        this.inProgress = false;
+    }
+    SignupComponent.prototype.ngOnInit = function () {
+        this.loginReactiveForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+            'credentials': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
+                'username': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+                'password': new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
+            })
+        });
+    };
+    SignupComponent.prototype.loginRF = function () {
+        this.inProgress = true;
+        this.authSrv.signUp(this.loginReactiveForm.get('credentials.username').value, this.loginReactiveForm.get('credentials.password').value);
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('loginForm'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgForm"])
+    ], SignupComponent.prototype, "loginForm", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('lgroup'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgModelGroup"])
+    ], SignupComponent.prototype, "loginGroup", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["HostBinding"])('@routingAminTriggerEnterLeft'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], SignupComponent.prototype, "routingAminTriggerEnterLeft", void 0);
+    SignupComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-signup',
+            template: __webpack_require__(/*! ./signup.component.html */ "./src/app/auth/signup/signup.component.html"),
+            animations: [src_app_common_tact_anim_1__WEBPACK_IMPORTED_MODULE_5__["routingAminTriggerEnterLeft"]],
+            styles: [__webpack_require__(/*! ./signup.component.css */ "./src/app/auth/signup/signup.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
+    ], SignupComponent);
+    return SignupComponent;
 }());
 
 
@@ -1457,7 +1606,7 @@ var AboutComponent = /** @class */ (function () {
     AboutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-about',
-            template: "\n    <h1> About TACT</h1>\n\n<mat-dialog-content>\nVersion : {{passedData.version}}\n</mat-dialog-content>\n\n<mat-dialog-actions>\n  <button mat-raised-button color=\"primary\"[mat-dialog-close]=\"true\">Close</button>\n</mat-dialog-actions>"
+            template: "\n    <h1> About MEAN STACK tool</h1>\n\n<mat-dialog-content>\nVersion : {{passedData.version}}\n<p> Demo application </p>\n<p> Developer : Lekhraj Dinkar </p>\n</mat-dialog-content>\n<mat-divider></mat-divider>\n<mat-dialog-actions>\n  <button mat-raised-button color=\"accent\"[mat-dialog-close]=\"true\">Close</button>\n</mat-dialog-actions>"
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object])
@@ -2091,7 +2240,7 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSortModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatStepperModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatMenuModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatStepperModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatMenuModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTreeModule"]
             ],
             exports: [
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatButtonModule"],
@@ -2112,7 +2261,7 @@ var MaterialModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTableModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatSortModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatPaginatorModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatStepperModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatMenuModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatStepperModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatExpansionModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatMenuModule"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatTreeModule"]
             ]
         })
     ], MaterialModule);

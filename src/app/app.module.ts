@@ -24,6 +24,11 @@ import * as fromAuth from './auth/auth.reducer';
 import {   PrimeNGModule} from './ngprime.module';
 import { AboutComponent } from './common/about.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { hostUrl } from './common/util';
+
+
+const config: SocketIoConfig = { url: hostUrl, options: {} };
 
 @NgModule({
   declarations: [
@@ -49,7 +54,9 @@ import { SignupComponent } from './auth/signup/signup.component';
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
-    StoreModule.forFeature('authState', fromAuth.authReducer)
+    StoreModule.forFeature('authState', fromAuth.authReducer),
+    
+    SocketIoModule.forRoot(config)
 
     
   ],

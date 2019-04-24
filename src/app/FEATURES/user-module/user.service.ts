@@ -8,12 +8,12 @@ import { Fund } from '../fund-module/fund.model';
 import { TactState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
 import { LoadAllUserAction } from './user.actions';
+import { hostUrl } from 'src/app/common/util';
 
 @Injectable()
 export class UserService {
 
-  host = 'https://mean-backend-05-18-1991.herokuapp.com' ;
-  //host = 'http://localhost:5000' ;
+  host = hostUrl;
   users : User []
   constructor( private http : HttpClient
     , private authSrv : AuthService

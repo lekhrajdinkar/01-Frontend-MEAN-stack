@@ -5,6 +5,7 @@ import { Fund } from './fund.model';
 import { AuthService } from 'src/app/SERVICE/auth-service.service';
 import { map, tap, catchError, shareReplay } from 'rxjs/operators';
 import { UnderlyingFund } from './underlyingFund.model';
+import { hostUrl } from 'src/app/common/util';
 
 //============================
 // Play with HttpClient Here
@@ -12,8 +13,7 @@ import { UnderlyingFund } from './underlyingFund.model';
 @Injectable()
 export class FundService{
 
-  host = 'https://mean-backend-05-18-1991.herokuapp.com' ;
-  //host = 'http://localhost:5000' ;
+  host = hostUrl;
 
   constructor(private http:HttpClient, private authSrv : AuthService) { }
 
