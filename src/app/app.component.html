@@ -24,7 +24,12 @@
 
             <a mat-list-item routerLink="/fund-module/get-all/">
                 <mat-icon>account_balance</mat-icon>
-                <span>View Orders</span>
+                <span>View Orders - tiles</span>
+            </a>
+
+            <a mat-list-item routerLink="/fund-module/get-all/table">
+                <mat-icon>account_balance</mat-icon>
+                <span>View Orders - table & chart</span>
             </a>
 
             <!-- <a mat-list-item routerLink="/fund-module/get-all/">
@@ -49,6 +54,9 @@
                     <span>Report</span>
             </button> -->
             <mat-divider></mat-divider>
+
+            <p *ngFor="let user of users" class="m-2 alert alert-primary "
+            > {{user.initial}} at {{user.time}}</p>
 
         </mat-nav-list>
 
@@ -117,6 +125,10 @@
 
     <router-outlet></router-outlet>
 
+    <!-- <div class="alert alert-primary w-25" role="alert" *ngIf=closeAlert (click)="closeAlert != closeAlert"
+    [@routingAminTriggerEnterLeft]>
+        New user has logged-in {{newUser}}
+    </div> -->
 
 
 </mat-sidenav-container>

@@ -30,7 +30,7 @@ export const click_trigger = trigger('clickTrigger', [
     state('unselected', style({
       border: '1px solid blue',
       backgroundColor: 'white',
-      padding : '6px',
+      padding : '0.5rem',
       transform : 'scale(1)'
     })),
     state('selected', style({
@@ -45,7 +45,7 @@ export const click_trigger = trigger('clickTrigger', [
       animate('0.2s', style({backgroundColor: 'rgb(231, 228, 210)', transform : 'translateX(-20px) scale(2)'})),
       animate('0.2s', style({transform : 'translateY(-20px) scale(1.5)'})),
       animate('0.2s', style({backgroundColor: 'rgb(231, 228, 210)', transform : 'translateX(20px) scale(2)'})),
-      animate('1s', style({transform : 'scale(5)'}))
+      animate('1s', style({transform : 'scale(2)'}))
     ])
   ])
 

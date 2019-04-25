@@ -8,11 +8,14 @@ import { Store } from '@ngrx/store';
 import { TactState } from './reducers';
 import { MatDialog } from '@angular/material';
 import { AboutComponent } from './common/about.component';
+import { Socket } from 'ngx-socket-io';
+import { routingAminTriggerEnterLeft } from './common/tact.anim-1';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations : [routingAminTriggerEnterLeft]
 })
 export class AppComponent implements OnInit {
 
@@ -20,10 +23,14 @@ export class AppComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
   dialogRef;
+  users = [];
+  newUser: String;
+  closeAlert = false;
 
   constructor(private authSrv: AuthService, private router: Router,
     private store: Store<TactState>,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private socket : Socket) {
 
   }
 
@@ -45,6 +52,15 @@ export class AppComponent implements OnInit {
         })
       )
     //.subscribe(noop);
+
+    this.socket.on('newuser' , 
+    (data)=> {
+      this.users.push({...data, time:Date()}); 
+      this.newUser = data.initial;
+      this.closeAlert = true;
+      console.log('data received from server: ', data)
+    });
+
   }
 
   logout() {

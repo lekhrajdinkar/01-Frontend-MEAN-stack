@@ -14,10 +14,10 @@
     box-shadow: 5px 5px 5px rgb(215, 233, 55);
 } */
 
-:host(:hover){
+/* :host(:hover){
     border: 2px solid rgb(215, 233, 55);
     padding: 10px
-}
+} */
 
 .view-button{
     width : 50%; background-color: rgb(203, 240, 70);

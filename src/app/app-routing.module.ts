@@ -8,6 +8,7 @@ import { ReportComponent } from './home/report/report.component';
 import { ErrorComponent } from './error/error.component';
 import { OrderMgtComponent } from './FEATURES/fund-module/order-mgt/order-mgt.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { AuthGaurdGuard } from './auth-gaurd.guard';
 
 
 const routes: Routes = [
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'ordermgt', component: OrderMgtComponent },
   { path: 'rpt', component: ReportComponent  },
 
-  { path: 'user-module', loadChildren:'./FEATURES/user-module/user.module#UserModule'}, 
+  { path: 'user-module', loadChildren:'./FEATURES/user-module/user.module#UserModule', canActivate : [AuthGaurdGuard]}, 
 
   { path: '**', component: ErrorComponent } //no match > login 
 ];
@@ -30,4 +31,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {enableTracing:false, preloadingStrategy: PreloadAllModules, useHash:true})],
   exports: [RouterModule],
 })
+
+
 export class AppRoutingModule {}

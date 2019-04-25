@@ -3,7 +3,7 @@
 
     <p-panel class="m-4">
       <p-header>
-          Fund of Funds
+          Order details in Tabular form
       </p-header>
 
 
@@ -21,9 +21,9 @@
             <tr>
                 <th *ngFor="let col of columns" pResizableColumn>
                     {{col.header}}
-                    <!-- <div style="width: 100%;">
+                    <div style="width: 100%;">
                             <p-chart type="doughnut" [data]="data"></p-chart>
-                    </div> -->
+                    </div>
                 </th>
             </tr>
 
@@ -64,10 +64,7 @@
 
 
 
-
-<mat-divider></mat-divider>
-
-<div class="d-flex flex-column flex-wrap ">
+<!-- <div class="d-flex flex-column flex-wrap ">
     <p-card *ngFor="let fof of fofs | slice:0:2; even as isEven; first as isFirst" class="m-4 w-25 ml-auto mr-auto" 
     [ngClass]="getCardClass(isEven, isFirst)">
             <p-header class="text text-center"> {{fof.abbr}}  {{fof.num}}</p-header>
@@ -76,4 +73,4 @@
             </div>
             <p-footer></p-footer>
     </p-card>
-</div>
+</div> -->

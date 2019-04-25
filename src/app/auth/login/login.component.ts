@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import { AuthService } from 'src/app/SERVICE/auth-service.service';
 import { routingAminTriggerEnterLeft } from 'src/app/common/tact.anim-1';
 import { promise } from 'protractor';
+import { Socket } from 'ngx-socket-io';
 
 
 @Component({
@@ -23,9 +24,10 @@ export class LoginComponent implements OnInit {
   
   inProgress = false;
 
-  constructor(private router:Router, private authSrv : AuthService) {}
+  constructor(private router:Router, private authSrv : AuthService, private socket : Socket) {}
 
   ngOnInit() {
+
     console.log(this.loginForm); 
 
     this.authSrv.user$.subscribe(

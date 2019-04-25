@@ -10,9 +10,11 @@ import { OrderMgtComponent } from './order-mgt/order-mgt.component';
 
 
 const routes: Routes = [
+  {path: 'fund-module/get-all/table', component: FofTableComponent},
   { path: 'fund-module/get-all', component: OrderMgtComponent, 
         children : [  { path: ':_id', component: FundDetailComponent},]
   },
+ 
   { path: 'fund-module/add-fund', component: FundAddComponent, canActivate : [AuthGaurdGuard] },
   { path: 'fund-module/fof', component: FofTableComponent }
 ];

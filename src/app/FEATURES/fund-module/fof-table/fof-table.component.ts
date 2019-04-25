@@ -16,7 +16,7 @@ export class FofTableComponent implements OnInit {
   created_bys: {label : String, value : String}[] ;
 
   data = {
-    labels: ['Growth','Equity','Bond'],
+    labels: ['item1','item2','item3'],
     datasets: [{
             data: [20, 70, 10],
             backgroundColor: ["#FF6384","#36A2EB","#FFCE56"],
@@ -42,8 +42,8 @@ export class FofTableComponent implements OnInit {
 
         this.cols = [
             { field: '_id', header: 'id' },
-            { field: 'abbr', header: 'Abbreviation' },
-            { field: 'num', header: 'Fund Number' },
+            { field: 'abbr', header: 'column 2' },
+            { field: 'num', header: 'column 3' },
             { field: 'created_by', header: 'created by' },
             { field: 'created_dt', header: 'created on' }
         ];

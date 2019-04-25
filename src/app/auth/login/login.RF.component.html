@@ -5,8 +5,9 @@
         
             <h5>Welcome to the MEAN Stack Tool</h5> 
             <p>This Application is for authorized user only.
-            Activity in the system is tracked.
-        </p>
+            Activity in the system is tracked.</p>
+            <p>{{data?.source}} {{data?.user}}</p>
+        
 
         <mat-divider></mat-divider>
 
@@ -51,6 +52,7 @@
             <div class="d-flex flex-row">
                 <button class="btn btn-sm btn-danger d-inline-block" type="button" (click)="setdefaultRF()">auto-fill</button>
                 <button class="btn btn-sm btn-danger d-inline-block" type="button" (click)="addMoreFeilds()">add Feilds</button>
+                <button class="btn btn-sm btn-danger d-inline-block" type="button" (click)="sendIo()">socket-test</button>
             </div>
            
         </form>

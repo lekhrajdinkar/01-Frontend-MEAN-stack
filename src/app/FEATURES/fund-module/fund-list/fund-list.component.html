@@ -1,47 +1,39 @@
+<div *ngIf='funds' class="col col-12 ">
+  <div class="d-flex flex-column flex-wrap justify-content-around">
+    <mat-card *ngFor="let fund of funds; index as i" class="fund-card mat-elevation-z10">
+      <div>
+        <fund [fund]=fund [index]=i (click)="fund.isClicked = !fund.isClicked" [@compBump]="fund.isClicked ? 'bump' : 'default' "></fund>
+      </div>
+    </mat-card>
+  </div>
+  <mat-divider></mat-divider>
 
-  <div *ngIf='funds' class="col col-12 ">
-    <div class="d-flex flex-column flex-wrap justify-content-around">
-      <mat-card *ngFor="let fund of funds; index as i" class="fund-card mat-elevation-z10">
-        <div> 
-          <fund [fund]=fund [index]=i (click)="fund.isClicked = !fund.isClicked"
-          [@compBump]="fund.isClicked ? 'bump' : 'default' "
-          ></fund> 
-        </div>
-      </mat-card>
+  <!-- paginator -->
+  <div class="d-flex justify-content-around">
+
+    <div>
+      <div> page size</div>
+      <input class="m-4 d-inline-block" type="text" placeholder="page Size" value="3" [ngStyle]="{'width' : isClickedInput ? '5rem' : '1rem'}"
+      (click)="isClickedInput = !isClickedInput" (dblclick)="doubleClickFund(pageSize)" #pageSize>
     </div>
-    <mat-divider></mat-divider>
-
-    <!-- paginator -->
-    <div class="d-flex justify-content-around m-4 bg-dark text-white">
-
-      <input class="m-4 d-inline-block" type="text" placeholder="page Size" value="3" 
-      [ngStyle]= "{'width' : isClickedInput ? '30px' : '40px'}"  
-      (click)="isClickedInput = !isClickedInput" 
-      (dblclick)="doubleClickFund(pageSize)"
-      #pageSize>
-      
-
-      <div class="d-flex m-1 bg-light text text-dark">
-
-          <!-- <input id="currPageInp" class="m-4 d-inline-block" type="number" (input)="changePage($event)" value="currentPage"> -->
-          <span *ngFor="let i of pageArray" class="m-4 d-inline-block" [@highlightPageNum] = "currentPage == i ? 'selected' : 'unselected' ">{{i}} </span>
-          
-         
-        </div>
-
-      <button mat-raised-button color="primary" class="m-4" (click)='previous(pageSize.value)' [disabled]="currentPage == 1 ? true: false ">Previous</button>
-      <button mat-raised-button color="primary" class="m-4" (click)='next(pageSize.value)' [disabled]="currentPage === totalPage ? true: false" >Next</button>
-
-    </div>
-
     
+
+
+    <div class="d-flex text text-dark">
+
+      <!-- <input id="currPageInp" class="m-4 d-inline-block" type="number" (input)="changePage($event)" value="currentPage"> -->
+      <span *ngFor="let i of pageArray" class="mt-4 mb-4 ml-2 d-inline-block" [@highlightPageNum]="currentPage == i ? 'selected' : 'unselected' ">{{i}}
+      </span>
+
+
+    </div>
+
+    <button mat-raised-button color="primary" class="m-4" (click)='previous(pageSize.value)' [disabled]="currentPage == 1 ? true: false ">Previous</button>
+    <button mat-raised-button color="primary" class="m-4" (click)='next(pageSize.value)' [disabled]="currentPage === totalPage ? true: false">Next</button>
+
   </div>
 
-  <!-- <mat-spinner *ngIf='!funds' class="fund-card"></mat-spinner> -->
-  <mat-divider></mat-divider>
-  <app-progress-bar *ngIf='!funds' class="fund-card"></app-progress-bar>
 
-  <!-- 
+</div>
 
- 
-   -->
+<app-progress-bar *ngIf='!funds' class="fund-card"></app-progress-bar>
