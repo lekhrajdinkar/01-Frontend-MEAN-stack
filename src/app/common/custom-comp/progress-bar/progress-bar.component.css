@@ -20,3 +20,7 @@
         width: 296px;
     }
 }
+
+:host{
+    border: 1px solid gainsboro;
+}

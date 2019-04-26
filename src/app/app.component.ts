@@ -86,6 +86,17 @@ export class AppComponent implements OnInit {
     });
   }
 
+  alert() {  
+    const dialogRef = this.dialog.open(AboutComponent, {
+      width: '400px',
+      data: { version: '6.0.0' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
+  }
+
 
 
 }

@@ -53,7 +53,7 @@ module.exports = ".fund-card{\n    border: none;\n}\n\n.is-odd{\n    background-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col\">\n\n    <p-panel class=\"m-4\">\n      <p-header>\n          Fund of Funds\n      </p-header>\n\n\n      <p-table #dt [columns]=\"cols\" [value]=\"fofs\" [paginator]=\"true\" [rows]=\"10\"\n      [resizableColumns]=\"true\"  selectionMode=\"single\">\n\n      <ng-template pTemplate=\"caption\">\n        <div style=\"text-align: right\">        \n          <input type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" \n          (input)=\"dt.filterGlobal($event.target.value, 'contains')\" style=\"width:auto\">\n        </div>\n      </ng-template>\n\n        <ng-template pTemplate=\"header\" let-columns >\n            <tr>\n                <th *ngFor=\"let col of columns\" pResizableColumn>\n                    {{col.header}}\n                    <!-- <div style=\"width: 100%;\">\n                            <p-chart type=\"doughnut\" [data]=\"data\"></p-chart>\n                    </div> -->\n                </th>\n            </tr>\n\n            <th *ngFor=\"let col of columns\" [ngSwitch]=\"col.field\">\n              <input *ngSwitchCase=\"'abbr'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n              \n              <!-- <div *ngSwitchCase=\"'year'\">\n                  Value < {{yearFilter}}\n                  <i class=\"fa fa-close\" (click)=\"yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)\" style=\"cursor:pointer\" *ngIf=\"yearFilter\"></i>\n                  <p-slider [style]=\"{'width':'100%','margin-top':'8px'}\" [(ngModel)]=\"yearFilter\" [min]=\"1970\" [max]=\"2010\" (onChange)=\"onYearChange($event, dt)\"></p-slider>\n              </div> -->\n              \n              <p-dropdown *ngSwitchCase=\"'num'\" [options]=\"fundNumbers\" [style]=\"{'width':'100%'}\" (onChange)=\"dt.filter($event.value, col.field, 'equals')\"></p-dropdown>\n              \n              <p-multiSelect *ngSwitchCase=\"'created_by'\" [options]=\"created_bys\"  (onChange)=\"dt.filter($event.value, col.field, 'in')\"></p-multiSelect> \n          </th>\n\n        </ng-template>\n        \n        <ng-template pTemplate=\"body\" let-rowData let-columns=\"columns\">\n            <tr [pSelectableRow]=\"rowData\">\n                <td *ngFor=\"let col of columns\" class=\"ui-resizable-column\">\n                    {{rowData[col.field]}}\n                </td>\n            </tr>\n        </ng-template>\n    </p-table>\n\n\n      <p-footer>\n          \n      </p-footer>\n  </p-panel>\n \n\n  </div>\n</div>\n\n\n\n\n<mat-divider></mat-divider>\n\n<div class=\"d-flex flex-column flex-wrap \">\n    <p-card *ngFor=\"let fof of fofs | slice:0:2; even as isEven; first as isFirst\" class=\"m-4 w-25 ml-auto mr-auto\" \n    [ngClass]=\"getCardClass(isEven, isFirst)\">\n            <p-header class=\"text text-center\"> {{fof.abbr}}  {{fof.num}}</p-header>\n            <div style=\"width: 100%;\">\n                    <p-chart type=\"doughnut\" [data]=\"data\"></p-chart>\n            </div>\n            <p-footer></p-footer>\n    </p-card>\n</div>\n"
+module.exports = "<div class=\"row\">\n  <div class=\"col\">\n\n    <p-panel class=\"m-4\">\n      <p-header>\n          Order details in Tabular form\n      </p-header>\n\n\n      <p-table #dt [columns]=\"cols\" [value]=\"fofs\" [paginator]=\"true\" [rows]=\"10\"\n      [resizableColumns]=\"true\"  selectionMode=\"single\">\n\n      <ng-template pTemplate=\"caption\">\n        <div style=\"text-align: right\">        \n          <input type=\"text\" pInputText size=\"50\" placeholder=\"Global Filter\" \n          (input)=\"dt.filterGlobal($event.target.value, 'contains')\" style=\"width:auto\">\n        </div>\n      </ng-template>\n\n        <ng-template pTemplate=\"header\" let-columns >\n            <tr>\n                <th *ngFor=\"let col of columns\" pResizableColumn>\n                    {{col.header}}\n                    <!-- <div style=\"width: 100%;\">\n                            <p-chart type=\"doughnut\" [data]=\"data\"></p-chart>\n                    </div> -->\n                </th>\n            </tr>\n\n            <th *ngFor=\"let col of columns\" [ngSwitch]=\"col.field\">\n              <input *ngSwitchCase=\"'abbr'\" pInputText type=\"text\" (input)=\"dt.filter($event.target.value, col.field, col.filterMatchMode)\">\n              \n              <!-- <div *ngSwitchCase=\"'year'\">\n                  Value < {{yearFilter}}\n                  <i class=\"fa fa-close\" (click)=\"yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)\" style=\"cursor:pointer\" *ngIf=\"yearFilter\"></i>\n                  <p-slider [style]=\"{'width':'100%','margin-top':'8px'}\" [(ngModel)]=\"yearFilter\" [min]=\"1970\" [max]=\"2010\" (onChange)=\"onYearChange($event, dt)\"></p-slider>\n              </div> -->\n              \n              <p-dropdown *ngSwitchCase=\"'num'\" [options]=\"fundNumbers\" [style]=\"{'width':'100%'}\" (onChange)=\"dt.filter($event.value, col.field, 'equals')\"></p-dropdown>\n              \n              <p-multiSelect *ngSwitchCase=\"'created_by'\" [options]=\"created_bys\"  (onChange)=\"dt.filter($event.value, col.field, 'in')\"></p-multiSelect> \n          </th>\n\n        </ng-template>\n        \n        <ng-template pTemplate=\"body\" let-rowData let-columns=\"columns\">\n            <tr [pSelectableRow]=\"rowData\">\n                <td *ngFor=\"let col of columns\" class=\"ui-resizable-column\">\n                    {{rowData[col.field]}}\n                </td>\n            </tr>\n        </ng-template>\n    </p-table>\n\n\n      <p-footer>\n          \n      </p-footer>\n  </p-panel>\n \n\n  </div>\n</div>\n\n\n\n<!-- <div class=\"d-flex flex-column flex-wrap \">\n    <p-card *ngFor=\"let fof of fofs | slice:0:2; even as isEven; first as isFirst\" class=\"m-4 w-25 ml-auto mr-auto\" \n    [ngClass]=\"getCardClass(isEven, isFirst)\">\n            <p-header class=\"text text-center\"> {{fof.abbr}}  {{fof.num}}</p-header>\n            <div style=\"width: 100%;\">\n                    <p-chart type=\"doughnut\" [data]=\"data\"></p-chart>\n            </div>\n            <p-footer></p-footer>\n    </p-card>\n</div> -->\n"
 
 /***/ }),
 
@@ -77,7 +77,7 @@ var FofTableComponent = /** @class */ (function () {
     function FofTableComponent(fundSrv) {
         this.fundSrv = fundSrv;
         this.data = {
-            labels: ['Growth', 'Equity', 'Bond'],
+            labels: ['item1', 'item2', 'item3'],
             datasets: [{
                     data: [20, 70, 10],
                     backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
@@ -97,8 +97,8 @@ var FofTableComponent = /** @class */ (function () {
         });
         this.cols = [
             { field: '_id', header: 'id' },
-            { field: 'abbr', header: 'Abbreviation' },
-            { field: 'num', header: 'Fund Number' },
+            { field: 'abbr', header: 'column 2' },
+            { field: 'num', header: 'column 3' },
             { field: 'created_by', header: 'created by' },
             { field: 'created_dt', header: 'created on' }
         ];
@@ -218,7 +218,7 @@ module.exports = ".progress-comp{\n    display: fixed;\n    margin: auto auto;\n
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div *ngIf='!isProgress' class=\"m-4\">\n{{fof_num}}\n<span *ngIf='noUFflag' class=\"badge badge-pill badge-light\">NO data Found</span>\n\n\n\n    <mat-tab-group>\n        <mat-tab [label]=\"[uf.num]\" *ngFor=\"let uf of underlyingFunds\"> \n            <div>\n                <table class=\"table table-dark m-4\">\n                    <tr *ngFor=\"let e of (uf | keyvalue) ; even as isEven\">\n                        <td class=\"text text-left\">{{e.key| uppercase}}</td> <td class=\"text text-left\">{{e.value}}</td>\n                    </tr>\n                </table>\n            </div>\n        </mat-tab>\n    </mat-tab-group>\n    \n    \n    <mat-divider></mat-divider>\n   \n        <!-- <button mat-button class=\"mat-raised-button mat-primary mt-4\" [routerLink]=\"['/fund-module/get-all']\">back</button> -->\n\n</div>\n<!-- <mat-progress-bar mode=\"indeterminate\" *ngIf='!underlyingFunds' ></mat-progress-bar> -->\n<!-- <mat-spinner *ngIf='!underlyingFunds' class=\"fund-card\"></mat-spinner> -->\n\n<app-progress-bar *ngIf='isProgress' class=\"progress-comp\" color='blue' bgColor='blue' message='loading details...'></app-progress-bar>\n\n\n    "
+module.exports = "\n<div *ngIf='!isProgress' class=\"m-4\">\n{{fof_num}}\n<!-- <span *ngIf='noUFflag' class=\"badge badge-pill badge-light\">NO data Found</span> -->\n\n\n\n    <mat-tab-group>\n        <mat-tab [label]=\"[uf.num]\" *ngFor=\"let uf of underlyingFunds\"> \n            <div>\n                <table class=\"table table-sm table-dark table-striped table-bordered table-hover m-4\">\n                    <tr *ngFor=\"let e of (uf | keyvalue) ; even as isEven\">\n                        <td class=\"text text-left\">{{e.key| uppercase}}</td> <td class=\"text text-left\">{{e.value}}</td>\n                    </tr>\n                </table>\n            </div>\n        </mat-tab>\n    </mat-tab-group>\n    \n    \n    <mat-divider></mat-divider>\n   \n        <!-- <button mat-button class=\"mat-raised-button mat-primary mt-4\" [routerLink]=\"['/fund-module/get-all']\">back</button> -->\n\n</div>\n<!-- <mat-progress-bar mode=\"indeterminate\" *ngIf='!underlyingFunds' ></mat-progress-bar> -->\n<!-- <mat-spinner *ngIf='!underlyingFunds' class=\"fund-card\"></mat-spinner> -->\n\n<app-progress-bar *ngIf='isProgress' class=\"progress-comp\" color='blue' bgColor='blue' message='loading details...'></app-progress-bar>\n\n\n    "
 
 /***/ }),
 
@@ -297,7 +297,7 @@ var FundDetailComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".fund-card {\n    margin: 20px auto;\n    max-width: 390px;\n}\n\n.fund-actions {\n    text-align: center; \n}\n\n.page{\n    max-width: 500px;\n    margin: 50px auto 0 auto;\n  }\n\n#temp_id1{\n    box-shadow: 5px 5px 10px rgb(231, 228, 210)\n  }\n\n.ng-class-1{\n    border: 5px solid blue;\n    display: inline-block;\n  }\n\n.css-anim-1{\n    -webkit-animation: moved 1s;\n            animation: moved 1s;\n  }\n\n@-webkit-keyframes moved {\n    0%{\n          opacity: 0;\n          -webkit-transform: translateY(0) scale(1);\n                  transform: translateY(0) scale(1)\n    }\n    50%{\n          opacity: 0.5 ;\n          -webkit-transform: translateY(20px) scale(1);\n                  transform: translateY(20px) scale(1)\n    }\n    75%{\n          opacity: 1;\n          -webkit-transform:  translateY(0) scale(1.2);\n                  transform:  translateY(0) scale(1.2) \n    }\n    100%{\n      opacity: 1;\n      -webkit-transform:  scale(1);\n              transform:  scale(1)\n    }\n  }\n\n@keyframes moved {\n    0%{\n          opacity: 0;\n          -webkit-transform: translateY(0) scale(1);\n                  transform: translateY(0) scale(1)\n    }\n    50%{\n          opacity: 0.5 ;\n          -webkit-transform: translateY(20px) scale(1);\n                  transform: translateY(20px) scale(1)\n    }\n    75%{\n          opacity: 1;\n          -webkit-transform:  translateY(0) scale(1.2);\n                  transform:  translateY(0) scale(1.2) \n    }\n    100%{\n      opacity: 1;\n      -webkit-transform:  scale(1);\n              transform:  scale(1)\n    }\n  }\n\n#currPageInp{\n    max-width: 50px;\n  }\n\n \n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC1saXN0L2Z1bmQtbGlzdC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0lBQ2pCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQix3QkFBd0I7RUFDMUI7O0FBRUE7SUFDRTtFQUNGOztBQUVBO0lBQ0Usc0JBQXNCO0lBQ3RCLHFCQUFxQjtFQUN2Qjs7QUFFQTtJQUNFLDJCQUFtQjtZQUFuQixtQkFBbUI7RUFDckI7O0FBRUE7SUFDRTtVQUNNLFVBQVU7VUFDVix5Q0FBZ0M7a0JBQWhDO0lBQ047SUFDQTtVQUNNLGFBQWE7VUFDYiw0Q0FBbUM7a0JBQW5DO0lBQ047SUFDQTtVQUNNLFVBQVU7VUFDViw0Q0FBbUM7a0JBQW5DO0lBQ047SUFDQTtNQUNFLFVBQVU7TUFDViw0QkFBbUI7Y0FBbkI7SUFDRjtFQUNGOztBQWpCQTtJQUNFO1VBQ00sVUFBVTtVQUNWLHlDQUFnQztrQkFBaEM7SUFDTjtJQUNBO1VBQ00sYUFBYTtVQUNiLDRDQUFtQztrQkFBbkM7SUFDTjtJQUNBO1VBQ00sVUFBVTtVQUNWLDRDQUFtQztrQkFBbkM7SUFDTjtJQUNBO01BQ0UsVUFBVTtNQUNWLDRCQUFtQjtjQUFuQjtJQUNGO0VBQ0Y7O0FBRUE7SUFDRSxlQUFlO0VBQ2pCIiwiZmlsZSI6InNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC1saXN0L2Z1bmQtbGlzdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZ1bmQtY2FyZCB7XG4gICAgbWFyZ2luOiAyMHB4IGF1dG87XG4gICAgbWF4LXdpZHRoOiAzOTBweDtcbn1cblxuLmZ1bmQtYWN0aW9ucyB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyOyBcbn1cblxuLnBhZ2V7XG4gICAgbWF4LXdpZHRoOiA1MDBweDtcbiAgICBtYXJnaW46IDUwcHggYXV0byAwIGF1dG87XG4gIH1cblxuICAjdGVtcF9pZDF7XG4gICAgYm94LXNoYWRvdzogNXB4IDVweCAxMHB4IHJnYigyMzEsIDIyOCwgMjEwKVxuICB9XG5cbiAgLm5nLWNsYXNzLTF7XG4gICAgYm9yZGVyOiA1cHggc29saWQgYmx1ZTtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIH1cblxuICAuY3NzLWFuaW0tMXtcbiAgICBhbmltYXRpb246IG1vdmVkIDFzO1xuICB9XG5cbiAgQGtleWZyYW1lcyBtb3ZlZCB7XG4gICAgMCV7XG4gICAgICAgICAgb3BhY2l0eTogMDtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMCkgc2NhbGUoMSlcbiAgICB9XG4gICAgNTAle1xuICAgICAgICAgIG9wYWNpdHk6IDAuNSA7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDIwcHgpIHNjYWxlKDEpXG4gICAgfVxuICAgIDc1JXtcbiAgICAgICAgICBvcGFjaXR5OiAxO1xuICAgICAgICAgIHRyYW5zZm9ybTogIHRyYW5zbGF0ZVkoMCkgc2NhbGUoMS4yKSBcbiAgICB9XG4gICAgMTAwJXtcbiAgICAgIG9wYWNpdHk6IDE7XG4gICAgICB0cmFuc2Zvcm06ICBzY2FsZSgxKVxuICAgIH1cbiAgfVxuXG4gICNjdXJyUGFnZUlucHtcbiAgICBtYXgtd2lkdGg6IDUwcHg7XG4gIH1cblxuIFxuIl19 */"
+module.exports = ".fund-card {\n    margin: 1rem auto;\n    max-width: 390px;\n}\n\n.fund-actions {\n    text-align: center; \n}\n\n.page{\n    max-width: 500px;\n    margin: 50px auto 0 auto;\n  }\n\n#temp_id1{\n    box-shadow: 5px 5px 10px rgb(231, 228, 210)\n  }\n\n.ng-class-1{\n    border: 5px solid blue;\n    display: inline-block;\n  }\n\n.css-anim-1{\n    -webkit-animation: moved 1s;\n            animation: moved 1s;\n  }\n\n@-webkit-keyframes moved {\n    0%{\n          opacity: 0;\n          -webkit-transform: translateY(0) scale(1);\n                  transform: translateY(0) scale(1)\n    }\n    50%{\n          opacity: 0.5 ;\n          -webkit-transform: translateY(20px) scale(1);\n                  transform: translateY(20px) scale(1)\n    }\n    75%{\n          opacity: 1;\n          -webkit-transform:  translateY(0) scale(1.2);\n                  transform:  translateY(0) scale(1.2) \n    }\n    100%{\n      opacity: 1;\n      -webkit-transform:  scale(1);\n              transform:  scale(1)\n    }\n  }\n\n@keyframes moved {\n    0%{\n          opacity: 0;\n          -webkit-transform: translateY(0) scale(1);\n                  transform: translateY(0) scale(1)\n    }\n    50%{\n          opacity: 0.5 ;\n          -webkit-transform: translateY(20px) scale(1);\n                  transform: translateY(20px) scale(1)\n    }\n    75%{\n          opacity: 1;\n          -webkit-transform:  translateY(0) scale(1.2);\n                  transform:  translateY(0) scale(1.2) \n    }\n    100%{\n      opacity: 1;\n      -webkit-transform:  scale(1);\n              transform:  scale(1)\n    }\n  }\n\n#currPageInp{\n    max-width: 50px;\n  }\n\n \n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC1saXN0L2Z1bmQtbGlzdC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0lBQ2pCLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQix3QkFBd0I7RUFDMUI7O0FBRUE7SUFDRTtFQUNGOztBQUVBO0lBQ0Usc0JBQXNCO0lBQ3RCLHFCQUFxQjtFQUN2Qjs7QUFFQTtJQUNFLDJCQUFtQjtZQUFuQixtQkFBbUI7RUFDckI7O0FBRUE7SUFDRTtVQUNNLFVBQVU7VUFDVix5Q0FBZ0M7a0JBQWhDO0lBQ047SUFDQTtVQUNNLGFBQWE7VUFDYiw0Q0FBbUM7a0JBQW5DO0lBQ047SUFDQTtVQUNNLFVBQVU7VUFDViw0Q0FBbUM7a0JBQW5DO0lBQ047SUFDQTtNQUNFLFVBQVU7TUFDViw0QkFBbUI7Y0FBbkI7SUFDRjtFQUNGOztBQWpCQTtJQUNFO1VBQ00sVUFBVTtVQUNWLHlDQUFnQztrQkFBaEM7SUFDTjtJQUNBO1VBQ00sYUFBYTtVQUNiLDRDQUFtQztrQkFBbkM7SUFDTjtJQUNBO1VBQ00sVUFBVTtVQUNWLDRDQUFtQztrQkFBbkM7SUFDTjtJQUNBO01BQ0UsVUFBVTtNQUNWLDRCQUFtQjtjQUFuQjtJQUNGO0VBQ0Y7O0FBRUE7SUFDRSxlQUFlO0VBQ2pCIiwiZmlsZSI6InNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC1saXN0L2Z1bmQtbGlzdC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZ1bmQtY2FyZCB7XG4gICAgbWFyZ2luOiAxcmVtIGF1dG87XG4gICAgbWF4LXdpZHRoOiAzOTBweDtcbn1cblxuLmZ1bmQtYWN0aW9ucyB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyOyBcbn1cblxuLnBhZ2V7XG4gICAgbWF4LXdpZHRoOiA1MDBweDtcbiAgICBtYXJnaW46IDUwcHggYXV0byAwIGF1dG87XG4gIH1cblxuICAjdGVtcF9pZDF7XG4gICAgYm94LXNoYWRvdzogNXB4IDVweCAxMHB4IHJnYigyMzEsIDIyOCwgMjEwKVxuICB9XG5cbiAgLm5nLWNsYXNzLTF7XG4gICAgYm9yZGVyOiA1cHggc29saWQgYmx1ZTtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIH1cblxuICAuY3NzLWFuaW0tMXtcbiAgICBhbmltYXRpb246IG1vdmVkIDFzO1xuICB9XG5cbiAgQGtleWZyYW1lcyBtb3ZlZCB7XG4gICAgMCV7XG4gICAgICAgICAgb3BhY2l0eTogMDtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMCkgc2NhbGUoMSlcbiAgICB9XG4gICAgNTAle1xuICAgICAgICAgIG9wYWNpdHk6IDAuNSA7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDIwcHgpIHNjYWxlKDEpXG4gICAgfVxuICAgIDc1JXtcbiAgICAgICAgICBvcGFjaXR5OiAxO1xuICAgICAgICAgIHRyYW5zZm9ybTogIHRyYW5zbGF0ZVkoMCkgc2NhbGUoMS4yKSBcbiAgICB9XG4gICAgMTAwJXtcbiAgICAgIG9wYWNpdHk6IDE7XG4gICAgICB0cmFuc2Zvcm06ICBzY2FsZSgxKVxuICAgIH1cbiAgfVxuXG4gICNjdXJyUGFnZUlucHtcbiAgICBtYXgtd2lkdGg6IDUwcHg7XG4gIH1cblxuIFxuIl19 */"
 
 /***/ }),
 
@@ -308,7 +308,7 @@ module.exports = ".fund-card {\n    margin: 20px auto;\n    max-width: 390px;\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n  <div *ngIf='funds' class=\"col col-12 \">\n    <div class=\"d-flex flex-column flex-wrap justify-content-around\">\n      <mat-card *ngFor=\"let fund of funds; index as i\" class=\"fund-card mat-elevation-z10\">\n        <div> \n          <fund [fund]=fund [index]=i (click)=\"fund.isClicked = !fund.isClicked\"\n          [@compBump]=\"fund.isClicked ? 'bump' : 'default' \"\n          ></fund> \n        </div>\n      </mat-card>\n    </div>\n    <mat-divider></mat-divider>\n\n    <!-- paginator -->\n    <div class=\"d-flex justify-content-around m-4 bg-dark text-white\">\n\n      <input class=\"m-4 d-inline-block\" type=\"text\" placeholder=\"page Size\" value=\"3\" \n      [ngStyle]= \"{'width' : isClickedInput ? '30px' : '40px'}\"  \n      (click)=\"isClickedInput = !isClickedInput\" \n      (dblclick)=\"doubleClickFund(pageSize)\"\n      #pageSize>\n      \n\n      <div class=\"d-flex m-1 bg-light text text-dark\">\n\n          <!-- <input id=\"currPageInp\" class=\"m-4 d-inline-block\" type=\"number\" (input)=\"changePage($event)\" value=\"currentPage\"> -->\n          <span *ngFor=\"let i of pageArray\" class=\"m-4 d-inline-block\" [@highlightPageNum] = \"currentPage == i ? 'selected' : 'unselected' \">{{i}} </span>\n          \n         \n        </div>\n\n      <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='previous(pageSize.value)' [disabled]=\"currentPage == 1 ? true: false \">Previous</button>\n      <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='next(pageSize.value)' [disabled]=\"currentPage === totalPage ? true: false\" >Next</button>\n\n    </div>\n\n    \n  </div>\n\n  <!-- <mat-spinner *ngIf='!funds' class=\"fund-card\"></mat-spinner> -->\n  <mat-divider></mat-divider>\n  <app-progress-bar *ngIf='!funds' class=\"fund-card\"></app-progress-bar>\n\n  <!-- \n\n \n   -->"
+module.exports = "<div *ngIf='funds' class=\"col col-12 \">\n  <div class=\"d-flex flex-column flex-wrap justify-content-around\">\n    <mat-card *ngFor=\"let fund of funds; index as i\" class=\"fund-card mat-elevation-z10\">\n      <div>\n        <fund [fund]=fund [index]=i (click)=\"fund.isClicked = !fund.isClicked\" [@compBump]=\"fund.isClicked ? 'bump' : 'default' \"></fund>\n      </div>\n    </mat-card>\n  </div>\n  <mat-divider></mat-divider>\n\n  <!-- paginator -->\n  <div class=\"d-flex justify-content-around\">\n\n    <div>\n      <div> page size</div>\n      <input class=\"m-4 d-inline-block\" type=\"text\" placeholder=\"page Size\" value=\"3\" [ngStyle]=\"{'width' : isClickedInput ? '5rem' : '1rem'}\"\n      (click)=\"isClickedInput = !isClickedInput\" (dblclick)=\"doubleClickFund(pageSize)\" #pageSize>\n    </div>\n    \n\n\n    <div class=\"d-flex text text-dark\">\n\n      <!-- <input id=\"currPageInp\" class=\"m-4 d-inline-block\" type=\"number\" (input)=\"changePage($event)\" value=\"currentPage\"> -->\n      <span *ngFor=\"let i of pageArray\" class=\"mt-4 mb-4 ml-2 d-inline-block\" [@highlightPageNum]=\"currentPage == i ? 'selected' : 'unselected' \">{{i}}\n      </span>\n\n\n    </div>\n\n    <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='previous(pageSize.value)' [disabled]=\"currentPage == 1 ? true: false \">Previous</button>\n    <button mat-raised-button color=\"primary\" class=\"m-4\" (click)='next(pageSize.value)' [disabled]=\"currentPage === totalPage ? true: false\">Next</button>\n\n  </div>\n\n\n</div>\n\n<app-progress-bar *ngIf='!funds' class=\"fund-card\"></app-progress-bar>\n"
 
 /***/ }),
 
@@ -431,6 +431,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
+    { path: 'fund-module/get-all/table', component: _fof_table_fof_table_component__WEBPACK_IMPORTED_MODULE_7__["FofTableComponent"] },
     { path: 'fund-module/get-all', component: _order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_8__["OrderMgtComponent"],
         children: [{ path: ':_id', component: _fund_detail_fund_detail_component__WEBPACK_IMPORTED_MODULE_5__["FundDetailComponent"] },]
     },
@@ -542,6 +543,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/SERVICE/auth-service.service */ "./src/app/SERVICE/auth-service.service.ts");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var src_app_common_util__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/common/util */ "./src/app/common/util.ts");
+
 
 
 
@@ -552,11 +555,10 @@ __webpack_require__.r(__webpack_exports__);
 // Play with HttpClient Here
 //============================
 var FundService = /** @class */ (function () {
-    //host = 'http://localhost:5000' ;
     function FundService(http, authSrv) {
         this.http = http;
         this.authSrv = authSrv;
-        this.host = 'https://mean-backend-05-18-1991.herokuapp.com';
+        this.host = src_app_common_util__WEBPACK_IMPORTED_MODULE_6__["hostUrl"];
     }
     //1. Get full response
     FundService.prototype.getAllFunds = function (pageNumber, pageSize) {
@@ -670,7 +672,7 @@ var FundService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".fund {\n    text-align: center;\n    max-width: 390px;\n    margin: 0 auto;\n}\n\n:host{\n    display: block\n}\n\n/* :host(.activate){\n    display: block;\n    border: 2px solid rgb(215, 233, 55);\n    box-shadow: 5px 5px 5px rgb(215, 233, 55);\n} */\n\n:host(:hover){\n    border: 2px solid rgb(215, 233, 55);\n    padding: 10px\n}\n\n.view-button{\n    width : 50%; background-color: rgb(203, 240, 70);\n    transition: all 1s;\n    -webkit-animation: moved 2s;\n            animation: moved 2s;\n    text-align: center\n  }\n\n.view-button:hover{\n    width : 70%; \n    background-color: rgb(151, 172, 79);\n  }\n\n@-webkit-keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n\n@keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC9mdW5kLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGNBQWM7QUFDbEI7O0FBRUE7SUFDSTtBQUNKOztBQUVBOzs7O0dBSUc7O0FBRUg7SUFDSSxtQ0FBbUM7SUFDbkM7QUFDSjs7QUFFQTtJQUNJLFdBQVcsRUFBRSxtQ0FBbUM7SUFDaEQsa0JBQWtCO0lBQ2xCLDJCQUFtQjtZQUFuQixtQkFBbUI7SUFDbkI7RUFDRjs7QUFFQTtJQUNFLFdBQVc7SUFDWCxtQ0FBbUM7RUFDckM7O0FBRUE7TUFDSTtZQUNNLFVBQVU7WUFDVix5Q0FBZ0M7b0JBQWhDO01BQ047TUFDQTtZQUNNLGFBQWE7WUFDYiw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtZQUNNLFVBQVU7WUFDViw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtRQUNFLFVBQVU7UUFDViw0QkFBbUI7Z0JBQW5CO0VBQ047RUFDQTs7QUFqQkE7TUFDSTtZQUNNLFVBQVU7WUFDVix5Q0FBZ0M7b0JBQWhDO01BQ047TUFDQTtZQUNNLGFBQWE7WUFDYiw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtZQUNNLFVBQVU7WUFDViw0Q0FBbUM7b0JBQW5DO01BQ047TUFDQTtRQUNFLFVBQVU7UUFDViw0QkFBbUI7Z0JBQW5CO0VBQ047RUFDQSIsImZpbGUiOiJzcmMvYXBwL0ZFQVRVUkVTL2Z1bmQtbW9kdWxlL2Z1bmQvZnVuZC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZ1bmQge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBtYXgtd2lkdGg6IDM5MHB4O1xuICAgIG1hcmdpbjogMCBhdXRvO1xufVxuXG46aG9zdHtcbiAgICBkaXNwbGF5OiBibG9ja1xufVxuXG4vKiA6aG9zdCguYWN0aXZhdGUpe1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigyMTUsIDIzMywgNTUpO1xuICAgIGJveC1zaGFkb3c6IDVweCA1cHggNXB4IHJnYigyMTUsIDIzMywgNTUpO1xufSAqL1xuXG46aG9zdCg6aG92ZXIpe1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigyMTUsIDIzMywgNTUpO1xuICAgIHBhZGRpbmc6IDEwcHhcbn1cblxuLnZpZXctYnV0dG9ue1xuICAgIHdpZHRoIDogNTAlOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjAzLCAyNDAsIDcwKTtcbiAgICB0cmFuc2l0aW9uOiBhbGwgMXM7XG4gICAgYW5pbWF0aW9uOiBtb3ZlZCAycztcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXJcbiAgfVxuXG4gIC52aWV3LWJ1dHRvbjpob3ZlcntcbiAgICB3aWR0aCA6IDcwJTsgXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiKDE1MSwgMTcyLCA3OSk7XG4gIH1cblxuICBAa2V5ZnJhbWVzIG1vdmVkIHtcbiAgICAgIDAle1xuICAgICAgICAgICAgb3BhY2l0eTogMDtcbiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgwKSBzY2FsZSgxKVxuICAgICAgfVxuICAgICAgNTAle1xuICAgICAgICAgICAgb3BhY2l0eTogMC41IDtcbiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlWCgyMHB4KSBzY2FsZSgxKVxuICAgICAgfVxuICAgICAgNzUle1xuICAgICAgICAgICAgb3BhY2l0eTogMTtcbiAgICAgICAgICAgIHRyYW5zZm9ybTogIHRyYW5zbGF0ZVgoMCkgc2NhbGUoMS4xKVxuICAgICAgfVxuICAgICAgMTAwJXtcbiAgICAgICAgb3BhY2l0eTogMTtcbiAgICAgICAgdHJhbnNmb3JtOiAgc2NhbGUoMSlcbiAgfVxuICB9Il19 */"
+module.exports = ".fund {\n    text-align: center;\n    max-width: 390px;\n    margin: 0 auto;\n}\n\n:host{\n    display: block\n}\n\n/* :host(.activate){\n    display: block;\n    border: 2px solid rgb(215, 233, 55);\n    box-shadow: 5px 5px 5px rgb(215, 233, 55);\n} */\n\n/* :host(:hover){\n    border: 2px solid rgb(215, 233, 55);\n    padding: 10px\n} */\n\n.view-button{\n    width : 50%; background-color: rgb(203, 240, 70);\n    transition: all 1s;\n    -webkit-animation: moved 2s;\n            animation: moved 2s;\n    text-align: center\n  }\n\n.view-button:hover{\n    width : 70%; \n    background-color: rgb(151, 172, 79);\n  }\n\n@-webkit-keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n\n@keyframes moved {\n      0%{\n            opacity: 0;\n            -webkit-transform: translateX(0) scale(1);\n                    transform: translateX(0) scale(1)\n      }\n      50%{\n            opacity: 0.5 ;\n            -webkit-transform: translateX(20px) scale(1);\n                    transform: translateX(20px) scale(1)\n      }\n      75%{\n            opacity: 1;\n            -webkit-transform:  translateX(0) scale(1.1);\n                    transform:  translateX(0) scale(1.1)\n      }\n      100%{\n        opacity: 1;\n        -webkit-transform:  scale(1);\n                transform:  scale(1)\n  }\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC9mdW5kLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGNBQWM7QUFDbEI7O0FBRUE7SUFDSTtBQUNKOztBQUVBOzs7O0dBSUc7O0FBRUg7OztHQUdHOztBQUVIO0lBQ0ksV0FBVyxFQUFFLG1DQUFtQztJQUNoRCxrQkFBa0I7SUFDbEIsMkJBQW1CO1lBQW5CLG1CQUFtQjtJQUNuQjtFQUNGOztBQUVBO0lBQ0UsV0FBVztJQUNYLG1DQUFtQztFQUNyQzs7QUFFQTtNQUNJO1lBQ00sVUFBVTtZQUNWLHlDQUFnQztvQkFBaEM7TUFDTjtNQUNBO1lBQ00sYUFBYTtZQUNiLDRDQUFtQztvQkFBbkM7TUFDTjtNQUNBO1lBQ00sVUFBVTtZQUNWLDRDQUFtQztvQkFBbkM7TUFDTjtNQUNBO1FBQ0UsVUFBVTtRQUNWLDRCQUFtQjtnQkFBbkI7RUFDTjtFQUNBOztBQWpCQTtNQUNJO1lBQ00sVUFBVTtZQUNWLHlDQUFnQztvQkFBaEM7TUFDTjtNQUNBO1lBQ00sYUFBYTtZQUNiLDRDQUFtQztvQkFBbkM7TUFDTjtNQUNBO1lBQ00sVUFBVTtZQUNWLDRDQUFtQztvQkFBbkM7TUFDTjtNQUNBO1FBQ0UsVUFBVTtRQUNWLDRCQUFtQjtnQkFBbkI7RUFDTjtFQUNBIiwiZmlsZSI6InNyYy9hcHAvRkVBVFVSRVMvZnVuZC1tb2R1bGUvZnVuZC9mdW5kLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZnVuZCB7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1heC13aWR0aDogMzkwcHg7XG4gICAgbWFyZ2luOiAwIGF1dG87XG59XG5cbjpob3N0e1xuICAgIGRpc3BsYXk6IGJsb2NrXG59XG5cbi8qIDpob3N0KC5hY3RpdmF0ZSl7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gICAgYm9yZGVyOiAycHggc29saWQgcmdiKDIxNSwgMjMzLCA1NSk7XG4gICAgYm94LXNoYWRvdzogNXB4IDVweCA1cHggcmdiKDIxNSwgMjMzLCA1NSk7XG59ICovXG5cbi8qIDpob3N0KDpob3Zlcil7XG4gICAgYm9yZGVyOiAycHggc29saWQgcmdiKDIxNSwgMjMzLCA1NSk7XG4gICAgcGFkZGluZzogMTBweFxufSAqL1xuXG4udmlldy1idXR0b257XG4gICAgd2lkdGggOiA1MCU7IGJhY2tncm91bmQtY29sb3I6IHJnYigyMDMsIDI0MCwgNzApO1xuICAgIHRyYW5zaXRpb246IGFsbCAxcztcbiAgICBhbmltYXRpb246IG1vdmVkIDJzO1xuICAgIHRleHQtYWxpZ246IGNlbnRlclxuICB9XG5cbiAgLnZpZXctYnV0dG9uOmhvdmVye1xuICAgIHdpZHRoIDogNzAlOyBcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTUxLCAxNzIsIDc5KTtcbiAgfVxuXG4gIEBrZXlmcmFtZXMgbW92ZWQge1xuICAgICAgMCV7XG4gICAgICAgICAgICBvcGFjaXR5OiAwO1xuICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDApIHNjYWxlKDEpXG4gICAgICB9XG4gICAgICA1MCV7XG4gICAgICAgICAgICBvcGFjaXR5OiAwLjUgO1xuICAgICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKDIwcHgpIHNjYWxlKDEpXG4gICAgICB9XG4gICAgICA3NSV7XG4gICAgICAgICAgICBvcGFjaXR5OiAxO1xuICAgICAgICAgICAgdHJhbnNmb3JtOiAgdHJhbnNsYXRlWCgwKSBzY2FsZSgxLjEpXG4gICAgICB9XG4gICAgICAxMDAle1xuICAgICAgICBvcGFjaXR5OiAxO1xuICAgICAgICB0cmFuc2Zvcm06ICBzY2FsZSgxKVxuICB9XG4gIH0iXX0= */"
 
 /***/ }),
 
@@ -681,7 +683,7 @@ module.exports = ".fund {\n    text-align: center;\n    max-width: 390px;\n    m
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div  (click)=\"onSimpleClick()\">\n\n<mat-card-header>\n    <mat-card-title>\n        <p class=\"badge badge-warning text-wrap\"> Order Id : {{fund._id}}</p>\n        <div [@divTrigger]=\"clickInfo\"></div>\n    </mat-card-title>\n</mat-card-header>\n\n<!-- <img mat-card-image [src]=\"course.iconUrl\"> -->\n\n<div class=\"row\">\n    <div class=\"col col-9\">\n        <mat-card-content>\n            <p class=\"text-muted\">Abbreviation: {{fund.abbr}}</p>\n            <p class=\"text-muted\">Created by: {{fund.created_by}}</p>\n     </mat-card-content>\n    </div>\n\n    <div class=\"col col-3\">\n            <mat-card-actions>\n                    <button mat-button class=\"mat-raised-button mat-primary\" \n                    class=\"view-button\"\n                    [routerLink]=\"['/fund-module/get-all', fund._id]\" ><h6 class=\"mt-2\">VIEW</h6></button>\n            </mat-card-actions> \n    </div>\n</div>\n\n\n\n\n\n\n</div>\n\n<!-- [queryParam] = \"[{fof_num: fund.num}]\" -->"
+module.exports = "<div  (click)=\"onSimpleClick()\" class=\"border border-grey p-2\">\n\n<mat-card-header>\n    <mat-card-title>\n        <p class=\"display-8\"> Order Id : {{fund._id}}</p>\n        <div [@divTrigger]=\"clickInfo\"></div>\n    </mat-card-title>\n</mat-card-header>\n<mat-divider></mat-divider>\n<!-- <img mat-card-image [src]=\"course.iconUrl\"> -->\n\n<div class=\"row\">\n    <div class=\"col mt-2\">\n        <mat-card-content>\n            <p class=\"text-primary border border-grey p-1 m-1\">Abbreviation: {{fund.abbr}}</p>\n            <p class=\"text-primary border border-grey p-1 m-1\">Created by: {{fund.created_by}}</p>\n     </mat-card-content>\n    </div>\n\n    <div class=\"col\">\n            <mat-card-actions>\n                    <div class=\"btn-group-sm\" role=\"group\" aria-label=\"Basic example\">\n                        <button type=\"button\" class=\"btn btn-secondary view-button\" [routerLink]=\"['/fund-module/get-all', fund._id]\">View</button>\n                        <button type=\"button\" class=\"btn btn-danger\" [routerLink]=\"['/fund-module/edit', fund._id]\">Edit</button>\n                    </div>\n            </mat-card-actions> \n    </div>\n</div>\n\n\n\n\n\n\n</div>\n\n<!-- [queryParam] = \"[{fof_num: fund.num}]\" -->"
 
 /***/ }),
 
@@ -841,6 +843,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var _auth_auth_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth/auth.actions */ "./src/app/auth/auth.actions.ts");
+/* harmony import */ var _common_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/util */ "./src/app/common/util.ts");
+
 
 
 
@@ -851,7 +855,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var UNKNOWN_USER = { username: 'unknown' };
 var AuthService = /** @class */ (function () {
-    //host = 'http://localhost:5000' ;
     function AuthService(router, http, store) {
         this.router = router;
         this.http = http;
@@ -859,7 +862,7 @@ var AuthService = /** @class */ (function () {
         //own observable
         this.subject = new rxjs__WEBPACK_IMPORTED_MODULE_2__["BehaviorSubject"](UNKNOWN_USER); //its private ***
         this.user$ = this.subject.asObservable();
-        this.host = 'https://mean-backend-05-18-1991.herokuapp.com';
+        this.host = _common_util__WEBPACK_IMPORTED_MODULE_8__["hostUrl"];
     }
     //Fake Login
     AuthService.prototype.authorize = function (initial, password) {
@@ -963,6 +966,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _error_error_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./error/error.component */ "./src/app/error/error.component.ts");
 /* harmony import */ var _FEATURES_fund_module_order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FEATURES/fund-module/order-mgt/order-mgt.component */ "./src/app/FEATURES/fund-module/order-mgt/order-mgt.component.ts");
 /* harmony import */ var _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./auth/signup/signup.component */ "./src/app/auth/signup/signup.component.ts");
+/* harmony import */ var _auth_gaurd_guard__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./auth-gaurd.guard */ "./src/app/auth-gaurd.guard.ts");
+
 
 
 
@@ -981,7 +986,7 @@ var routes = [
     { path: 'fundmtn', component: _home_fund_maintenance_fund_maintenance_component__WEBPACK_IMPORTED_MODULE_4__["FundMaintenanceComponent"] },
     { path: 'ordermgt', component: _FEATURES_fund_module_order_mgt_order_mgt_component__WEBPACK_IMPORTED_MODULE_7__["OrderMgtComponent"] },
     { path: 'rpt', component: _home_report_report_component__WEBPACK_IMPORTED_MODULE_5__["ReportComponent"] },
-    { path: 'user-module', loadChildren: './FEATURES/user-module/user.module#UserModule' },
+    { path: 'user-module', loadChildren: './FEATURES/user-module/user.module#UserModule', canActivate: [_auth_gaurd_guard__WEBPACK_IMPORTED_MODULE_9__["AuthGaurdGuard"]] },
     { path: '**', component: _error_error_component__WEBPACK_IMPORTED_MODULE_6__["ErrorComponent"] } //no match > login 
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -1018,7 +1023,7 @@ module.exports = "mat-sidenav {\n    width: 300px;\n}\n\nbutton{\n    outline-st
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-sidenav-container fullscreen>\n\n    <!-- SIDE NAV -->\n    <mat-sidenav #start>\n        <mat-nav-list (click)=\"start.close()\">\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"!(isLoggedIn$ | async)\">\n                <mat-icon>face</mat-icon> <span>Login</span>\n            </a>\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"isLoggedIn$ | async\" (click)=\"logout()\">\n                <mat-icon>power_settings_new</mat-icon> <span>Logout</span>\n            </a>\n\n            <!-- <a mat-list-item (click)=\"display = true\">\n                <mat-icon>info</mat-icon> <span>About</span>\n            </a> -->\n            <a mat-list-item (click)=\"about()\">\n                    <mat-icon>info</mat-icon> <span>About tool</span>\n            </a>\n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\">sub-Module-1 EQUITY (early loaded)</p>\n\n            <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>View Orders</span>\n            </a>\n\n            <!-- <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>link 2</span>\n            </a>  -->\n\n            <!-- <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>link 3</span>\n            </a> -->\n           \n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\">sub-Module-2 Admin (lazy load)</p>\n            <a mat-list-item routerLink=\"/user-module/\">Manage users</a>\n    \n\n            <mat-divider></mat-divider>\n            <!-- <button  mat-raised-button class=\"m-2\" [routerLink]= \"['rpt']\">\n                    <mat-icon>insert_drive_file</mat-icon>\n                    <span>Report</span>\n            </button> -->\n            <mat-divider></mat-divider>\n\n        </mat-nav-list>\n\n    </mat-sidenav>\n\n    <!-- MAT Tool Bar -->\n    <mat-toolbar color=\"primary\" class=\"sticky-top\">\n\n        <!-- MAT tool bar row - 1 -->\n        <mat-toolbar-row>\n\n            <!-- hamburger -->\n            <button class=\"menu-button\" mat-icon-button (click)=\"start.open('mouse')\">\n                <mat-icon>menu</mat-icon>\n            </button>\n\n            <!-- title -->\n            <button mat-icon-button color=\"accent\" routerLink= \"home\" *ngIf=\"(isLoggedIn$ | async)\">\n                <mat-icon>home</mat-icon>\n            </button>\n            <h2 class=\"text-monospace\"> MEAN Stack Tool</h2>\n            <div class=\"container ml-4\" *ngIf=\"isLoggedIn$ | async\">\n                <div class=\"row justify-content \">\n                    <button mat-raised-button color=\"accent\" (click)=\"this.router.navigate(['ordermgt'])\">\n                            <mat-icon>account_balance</mat-icon>\n                            <span>Order Management</span>\n                    </button>\n\n                    <button mat-raised-button color=\"accent\" class=\"ml-4\" [routerLink]= \"['rpt']\">\n                        <mat-icon>insert_drive_file</mat-icon>\n                        <span>Reports</span>\n                    </button>\n                </div>\n            </div>\n            <!-- menu option -->\n            <div class=\"ml-auto\" >\n\n                <!-- more Option button-->\n                <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n                    <mat-icon>more_vert</mat-icon>\n                </button>\n\n                <mat-menu #menu=\"matMenu\">\n                    <button mat-menu-item>\n                        <mat-icon>dashboard</mat-icon><span>Admin</span>\n                    </button>\n                    <button mat-menu-item (click)=\"this.router.navigate(['login'])\" *ngIf=\"!(isLoggedIn$ | async)\">\n                        <mat-icon>face</mat-icon><span>Login</span>\n                    </button>\n                    <button mat-menu-item (click)=\"logout()\" *ngIf=\"(isLoggedIn$ | async)\">\n                        <mat-icon>power_settings_new</mat-icon><span>Logout</span>\n                    </button>\n                    <button mat-menu-item>\n                        <mat-icon>info</mat-icon><span>About Tool</span>\n                    </button>\n                </mat-menu>\n\n            </div>\n\n        </mat-toolbar-row>\n        <!-- <mat-toolbar-row>\n                <span>Custom Toolbar</span>\n        </mat-toolbar-row> -->\n\n    </mat-toolbar>\n\n    <router-outlet></router-outlet>\n\n\n\n</mat-sidenav-container>\n\n<p-dialog header=\"About Tact\" [(visible)]=\"display\" [style]=\"{width: '300px'}\"\n[contentStyle]=\"{'overflow':'visible'}\" [transitionOptions]=\"'2ms'\">\n        Version : 6.0\n</p-dialog>"
+module.exports = "<mat-sidenav-container fullscreen>\n\n    <!-- SIDE NAV -->\n    <mat-sidenav #start>\n        <mat-nav-list (click)=\"start.close()\">\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"!(isLoggedIn$ | async)\">\n                <mat-icon>face</mat-icon> <span>Login</span>\n            </a>\n\n            <a mat-list-item routerLink=\"/login\" *ngIf=\"isLoggedIn$ | async\" (click)=\"logout()\">\n                <mat-icon>power_settings_new</mat-icon> <span>Logout</span>\n            </a>\n\n            <!-- <a mat-list-item (click)=\"display = true\">\n                <mat-icon>info</mat-icon> <span>About</span>\n            </a> -->\n            <a mat-list-item (click)=\"about()\">\n                    <mat-icon>info</mat-icon> <span>About tool</span>\n            </a>\n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\">sub-Module-1 EQUITY (early loaded)</p>\n\n            <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>View Orders - tiles</span>\n            </a>\n\n            <a mat-list-item routerLink=\"/fund-module/get-all/table\">\n                <mat-icon>account_balance</mat-icon>\n                <span>View Orders - table & chart</span>\n            </a>\n\n            <!-- <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>link 2</span>\n            </a>  -->\n\n            <!-- <a mat-list-item routerLink=\"/fund-module/get-all/\">\n                <mat-icon>account_balance</mat-icon>\n                <span>link 3</span>\n            </a> -->\n           \n\n            <mat-divider></mat-divider>\n            <p mat-list-item class=\"m-2 badge badge-info\">sub-Module-2 Admin (lazy load)</p>\n            <a mat-list-item routerLink=\"/user-module/\">Manage users</a>\n            <mat-divider></mat-divider>\n            <!-- <a mat-list-item (click)=\"alert()\">Alert logged-in users</a> -->\n\n            <mat-divider></mat-divider>\n            <!-- <button  mat-raised-button class=\"m-2\" [routerLink]= \"['rpt']\">\n                    <mat-icon>insert_drive_file</mat-icon>\n                    <span>Report</span>\n            </button> -->\n            <mat-divider></mat-divider>\n\n            <p *ngFor=\"let user of users\" class=\"m-2 alert alert-primary \"\n            > {{user.initial}} at {{user.time}}</p>\n\n        </mat-nav-list>\n\n    </mat-sidenav>\n\n    <!-- MAT Tool Bar -->\n    <mat-toolbar color=\"primary\" class=\"sticky-top\">\n\n        <!-- MAT tool bar row - 1 -->\n        <mat-toolbar-row>\n\n            <!-- hamburger -->\n            <button class=\"menu-button\" mat-icon-button (click)=\"start.open('mouse')\">\n                <mat-icon>menu</mat-icon>\n            </button>\n\n            <!-- title -->\n            <button mat-icon-button color=\"accent\" routerLink= \"home\" *ngIf=\"(isLoggedIn$ | async)\">\n                <mat-icon>home</mat-icon>\n            </button>\n            <h2 class=\"text-monospace\"> MEAN Stack Tool</h2>\n            <div class=\"container ml-4\" *ngIf=\"isLoggedIn$ | async\">\n                <div class=\"row justify-content \">\n                    <button mat-raised-button color=\"accent\" (click)=\"this.router.navigate(['ordermgt'])\">\n                            <mat-icon>account_balance</mat-icon>\n                            <span>Order Management</span>\n                    </button>\n\n                    <button mat-raised-button color=\"accent\" class=\"ml-4\" [routerLink]= \"['rpt']\">\n                        <mat-icon>insert_drive_file</mat-icon>\n                        <span>Reports</span>\n                    </button>\n                </div>\n            </div>\n            <!-- menu option -->\n            <div class=\"ml-auto\" >\n\n                <!-- more Option button-->\n                <button mat-icon-button [matMenuTriggerFor]=\"menu\">\n                    <mat-icon>more_vert</mat-icon>\n                </button>\n\n                <mat-menu #menu=\"matMenu\">\n                    <button mat-menu-item>\n                        <mat-icon>dashboard</mat-icon><span>Admin</span>\n                    </button>\n                    <button mat-menu-item (click)=\"this.router.navigate(['login'])\" *ngIf=\"!(isLoggedIn$ | async)\">\n                        <mat-icon>face</mat-icon><span>Login</span>\n                    </button>\n                    <button mat-menu-item (click)=\"logout()\" *ngIf=\"(isLoggedIn$ | async)\">\n                        <mat-icon>power_settings_new</mat-icon><span>Logout</span>\n                    </button>\n                    <button mat-menu-item>\n                        <mat-icon>info</mat-icon><span>About Tool</span>\n                    </button>\n                </mat-menu>\n\n            </div>\n\n        </mat-toolbar-row>\n        <!-- <mat-toolbar-row>\n                <span>Custom Toolbar</span>\n        </mat-toolbar-row> -->\n\n    </mat-toolbar>\n\n    <router-outlet></router-outlet>\n\n    <!-- <div class=\"alert alert-primary w-25\" role=\"alert\" *ngIf=closeAlert (click)=\"closeAlert != closeAlert\"\n    [@routingAminTriggerEnterLeft]>\n        New user has logged-in {{newUser}}\n    </div> -->\n\n\n</mat-sidenav-container>\n\n<p-dialog header=\"About Tact\" [(visible)]=\"display\" [style]=\"{width: '300px'}\"\n[contentStyle]=\"{'overflow':'visible'}\" [transitionOptions]=\"'2ms'\">\n        Version : 6.0\n</p-dialog>\n"
 
 /***/ }),
 
@@ -1040,6 +1045,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _common_about_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./common/about.component */ "./src/app/common/about.component.ts");
+/* harmony import */ var ngx_socket_io__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ngx-socket-io */ "./node_modules/ngx-socket-io/index.js");
+/* harmony import */ var _common_tact_anim_1__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./common/tact.anim-1 */ "./src/app/common/tact.anim-1.ts");
+
+
 
 
 
@@ -1049,15 +1058,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(authSrv, router, store, dialog) {
+    function AppComponent(authSrv, router, store, dialog, socket) {
         this.authSrv = authSrv;
         this.router = router;
         this.store = store;
         this.dialog = dialog;
+        this.socket = socket;
         this.title = 'TACT';
+        this.users = [];
+        this.closeAlert = false;
     }
     AppComponent.prototype.ngOnInit = function () {
         //transform one Obs to another.
+        var _this = this;
         //A. service approach
         //  this.isLoggedIn$ = this.authSrv.user$.pipe(
         //    map (user => {console.log(user); return user !==  UNKNOWN_USER; })
@@ -1070,6 +1083,12 @@ var AppComponent = /** @class */ (function () {
             return state.authState.isLoggedIn;
         }));
         //.subscribe(noop);
+        this.socket.on('newuser', function (data) {
+            _this.users.push(tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, data, { time: Date() }));
+            _this.newUser = data.initial;
+            _this.closeAlert = true;
+            console.log('data received from server: ', data);
+        });
     };
     AppComponent.prototype.logout = function () {
         this.authSrv.logout();
@@ -1090,15 +1109,26 @@ var AppComponent = /** @class */ (function () {
             console.log('The dialog was closed', result);
         });
     };
+    AppComponent.prototype.alert = function () {
+        var dialogRef = this.dialog.open(_common_about_component__WEBPACK_IMPORTED_MODULE_7__["AboutComponent"], {
+            width: '400px',
+            data: { version: '6.0.0' }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The dialog was closed', result);
+        });
+    };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
+            animations: [_common_tact_anim_1__WEBPACK_IMPORTED_MODULE_9__["routingAminTriggerEnterLeft"]],
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
             _ngrx_store__WEBPACK_IMPORTED_MODULE_5__["Store"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialog"]])
+            _angular_material__WEBPACK_IMPORTED_MODULE_6__["MatDialog"],
+            ngx_socket_io__WEBPACK_IMPORTED_MODULE_8__["Socket"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -1174,6 +1204,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngprime_module__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./ngprime.module */ "./src/app/ngprime.module.ts");
 /* harmony import */ var _common_about_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./common/about.component */ "./src/app/common/about.component.ts");
 /* harmony import */ var _auth_signup_signup_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./auth/signup/signup.component */ "./src/app/auth/signup/signup.component.ts");
+/* harmony import */ var ngx_socket_io__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ngx-socket-io */ "./node_modules/ngx-socket-io/index.js");
+/* harmony import */ var _common_util__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./common/util */ "./src/app/common/util.ts");
 
 
 
@@ -1200,6 +1232,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+var config = { url: _common_util__WEBPACK_IMPORTED_MODULE_27__["hostUrl"], options: {} };
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -1227,7 +1262,8 @@ var AppModule = /** @class */ (function () {
                 _ngrx_store__WEBPACK_IMPORTED_MODULE_16__["StoreModule"].forRoot(_reducers__WEBPACK_IMPORTED_MODULE_17__["reducers"], { metaReducers: _reducers__WEBPACK_IMPORTED_MODULE_17__["metaReducers"] }),
                 !_environments_environment__WEBPACK_IMPORTED_MODULE_19__["environment"].production ? _ngrx_store_devtools__WEBPACK_IMPORTED_MODULE_18__["StoreDevtoolsModule"].instrument() : [],
                 _ngrx_effects__WEBPACK_IMPORTED_MODULE_20__["EffectsModule"].forRoot([_app_effects__WEBPACK_IMPORTED_MODULE_21__["AppEffects"]]),
-                _ngrx_store__WEBPACK_IMPORTED_MODULE_16__["StoreModule"].forFeature('authState', _auth_auth_reducer__WEBPACK_IMPORTED_MODULE_22__["authReducer"])
+                _ngrx_store__WEBPACK_IMPORTED_MODULE_16__["StoreModule"].forFeature('authState', _auth_auth_reducer__WEBPACK_IMPORTED_MODULE_22__["authReducer"]),
+                ngx_socket_io__WEBPACK_IMPORTED_MODULE_26__["SocketIoModule"].forRoot(config)
             ],
             providers: [],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
@@ -1378,7 +1414,7 @@ function authReducer(state, action) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"login-page border\">\n    <mat-card-title>Login</mat-card-title>\n    <mat-card-content>\n\n        \n            <h5>Welcome to the MEAN Stack Tool</h5> \n            <p>This Application is for authorized user only.\n            Activity in the system is tracked.\n        </p>\n\n        <mat-divider></mat-divider>\n\n        <form (ngSubmit)=\"loginRF()\" class=\"login-form\" autocomplete=\"off\" novalidate [formGroup]=\"loginReactiveForm\">\n\n\n            <div *ngIf=\"inProgress\">\n                <app-progress-bar [message]=\"'authenticating...'\" class=\"progress-comp\" color='green' bgColor='green'\n                    width=\"1px\"></app-progress-bar>\n                <mat-divider></mat-divider>\n            </div>\n\n\n            <div [formGroupName]=\"'credentials'\" class=\"login-form\">\n                <mat-form-field class=\"mt-4\">\n                    <input matInput type=\"text\" placeholder=\"Enter Username\" [formControlName]=\"'username'\">\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.username').errors\">\n                    This name is invalid</span>\n\n                <mat-form-field>\n                    <input matInput type=\"password\" placeholder=\"Enter password\" [formControlName]=\"'password'\">\n                    <!-- <mat-icon matSuffix (click)=\"hide = !hide\">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.password').errors\">\n                        invalid password</span>\n            </div>\n\n\n\n            <mat-divider></mat-divider>\n            <div class=\"d-flex flex-column\">\n                <button mat-raised-button color=\"primary\" class=\"m-2\" type=\"submit\">Login</button>\n                <button mat-raised-button color=\"warning\" type=\"button\" class=\"m-2\" (click)=\"loginReactiveForm.reset()\">Clear</button>\n                <button mat-raised-button color=\"primary\" type=\"button\" class=\"m-2\"  (click)=\"launchSignUp()\">Sign up</button>\n            </div>\n\n            <mat-divider></mat-divider>\n\n            Dev mode :\n\n            <div class=\"d-flex flex-row\">\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"setdefaultRF()\">auto-fill</button>\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"addMoreFeilds()\">add Feilds</button>\n            </div>\n           \n        </form>\n\n    </mat-card-content>\n</mat-card>"
+module.exports = "<mat-card class=\"login-page border\">\n    <mat-card-title>Login</mat-card-title>\n    <mat-card-content>\n\n        \n            <h5>Welcome to the MEAN Stack Tool</h5> \n            <p>This Application is for authorized user only.\n            Activity in the system is tracked.</p>\n            <p>{{data?.source}} {{data?.user}}</p>\n        \n\n        <mat-divider></mat-divider>\n\n        <form (ngSubmit)=\"loginRF()\" class=\"login-form\" autocomplete=\"off\" novalidate [formGroup]=\"loginReactiveForm\">\n\n\n            <div *ngIf=\"inProgress\">\n                <app-progress-bar [message]=\"'authenticating...'\" class=\"progress-comp\" color='green' bgColor='green'\n                    width=\"1px\"></app-progress-bar>\n                <mat-divider></mat-divider>\n            </div>\n\n\n            <div [formGroupName]=\"'credentials'\" class=\"login-form\">\n                <mat-form-field class=\"mt-4\">\n                    <input matInput type=\"text\" placeholder=\"Enter Username\" [formControlName]=\"'username'\">\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.username').errors\">\n                    This name is invalid</span>\n\n                <mat-form-field>\n                    <input matInput type=\"password\" placeholder=\"Enter password\" [formControlName]=\"'password'\">\n                    <!-- <mat-icon matSuffix (click)=\"hide = !hide\">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->\n                </mat-form-field>\n                <span class=\"help-block\" style=\"color: coral; marker-end: 1rem;\" *ngIf=\"loginReactiveForm.get('credentials.password').errors\">\n                        invalid password</span>\n            </div>\n\n\n\n            <mat-divider></mat-divider>\n            <div class=\"d-flex flex-column\">\n                <button mat-raised-button color=\"primary\" class=\"m-2\" type=\"submit\">Login</button>\n                <button mat-raised-button color=\"warning\" type=\"button\" class=\"m-2\" (click)=\"loginReactiveForm.reset()\">Clear</button>\n                <button mat-raised-button color=\"primary\" type=\"button\" class=\"m-2\"  (click)=\"launchSignUp()\">Sign up</button>\n            </div>\n\n            <mat-divider></mat-divider>\n\n            Dev mode :\n\n            <div class=\"d-flex flex-row\">\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"setdefaultRF()\">auto-fill</button>\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"addMoreFeilds()\">add Feilds</button>\n                <button class=\"btn btn-sm btn-danger d-inline-block\" type=\"button\" (click)=\"sendIo()\">socket-test</button>\n            </div>\n           \n        </form>\n\n    </mat-card-content>\n</mat-card>"
 
 /***/ }),
 
@@ -1409,6 +1445,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/SERVICE/auth-service.service */ "./src/app/SERVICE/auth-service.service.ts");
 /* harmony import */ var src_app_common_tact_anim_1__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/common/tact.anim-1 */ "./src/app/common/tact.anim-1.ts");
+/* harmony import */ var ngx_socket_io__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-socket-io */ "./node_modules/ngx-socket-io/index.js");
+
 
 
 
@@ -1416,9 +1454,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(router, authSrv) {
+    function LoginComponent(router, authSrv, socket) {
         this.router = router;
         this.authSrv = authSrv;
+        this.socket = socket;
         this.routingAminTriggerEnterLeft = true;
         this.inProgress = false;
     }
@@ -1481,7 +1520,7 @@ var LoginComponent = /** @class */ (function () {
             animations: [src_app_common_tact_anim_1__WEBPACK_IMPORTED_MODULE_5__["routingAminTriggerEnterLeft"]],
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/auth/login/login.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"], ngx_socket_io__WEBPACK_IMPORTED_MODULE_6__["Socket"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1665,7 +1704,7 @@ var TactCommonModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".loading-bar{\n    height: 20px;\n    width: 300px;\n    margin: 1rem;\n    border: 2px solid rgb(0, 0, 0);\n}\n\n.loading-progress{\n    height: 100%;\n    width: 0px;\n    -webkit-animation: progress-1 2s infinite ;\n            animation: progress-1 2s infinite ;\n}\n\n@-webkit-keyframes progress-1 {\n    0%{\n        width: 0;\n    }\n\n    100%{\n        width: 296px;\n    }\n}\n\n@keyframes progress-1 {\n    0%{\n        width: 0;\n    }\n\n    100%{\n        width: 296px;\n    }\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tbW9uL2N1c3RvbS1jb21wL3Byb2dyZXNzLWJhci9wcm9ncmVzcy1iYXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixZQUFZO0lBQ1osWUFBWTtJQUNaLDhCQUE4QjtBQUNsQzs7QUFFQTtJQUNJLFlBQVk7SUFDWixVQUFVO0lBQ1YsMENBQWtDO1lBQWxDLGtDQUFrQztBQUN0Qzs7QUFFQTtJQUNJO1FBQ0ksUUFBUTtJQUNaOztJQUVBO1FBQ0ksWUFBWTtJQUNoQjtBQUNKOztBQVJBO0lBQ0k7UUFDSSxRQUFRO0lBQ1o7O0lBRUE7UUFDSSxZQUFZO0lBQ2hCO0FBQ0oiLCJmaWxlIjoic3JjL2FwcC9jb21tb24vY3VzdG9tLWNvbXAvcHJvZ3Jlc3MtYmFyL3Byb2dyZXNzLWJhci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvYWRpbmctYmFye1xuICAgIGhlaWdodDogMjBweDtcbiAgICB3aWR0aDogMzAwcHg7XG4gICAgbWFyZ2luOiAxcmVtO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigwLCAwLCAwKTtcbn1cblxuLmxvYWRpbmctcHJvZ3Jlc3N7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHdpZHRoOiAwcHg7XG4gICAgYW5pbWF0aW9uOiBwcm9ncmVzcy0xIDJzIGluZmluaXRlIDtcbn1cblxuQGtleWZyYW1lcyBwcm9ncmVzcy0xIHtcbiAgICAwJXtcbiAgICAgICAgd2lkdGg6IDA7XG4gICAgfVxuXG4gICAgMTAwJXtcbiAgICAgICAgd2lkdGg6IDI5NnB4O1xuICAgIH1cbn0iXX0= */"
+module.exports = ".loading-bar{\n    height: 20px;\n    width: 300px;\n    margin: 1rem;\n    border: 2px solid rgb(0, 0, 0);\n}\n\n.loading-progress{\n    height: 100%;\n    width: 0px;\n    -webkit-animation: progress-1 2s infinite ;\n            animation: progress-1 2s infinite ;\n}\n\n@-webkit-keyframes progress-1 {\n    0%{\n        width: 0;\n    }\n\n    100%{\n        width: 296px;\n    }\n}\n\n@keyframes progress-1 {\n    0%{\n        width: 0;\n    }\n\n    100%{\n        width: 296px;\n    }\n}\n\n:host{\n    border: 1px solid gainsboro;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tbW9uL2N1c3RvbS1jb21wL3Byb2dyZXNzLWJhci9wcm9ncmVzcy1iYXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixZQUFZO0lBQ1osWUFBWTtJQUNaLDhCQUE4QjtBQUNsQzs7QUFFQTtJQUNJLFlBQVk7SUFDWixVQUFVO0lBQ1YsMENBQWtDO1lBQWxDLGtDQUFrQztBQUN0Qzs7QUFFQTtJQUNJO1FBQ0ksUUFBUTtJQUNaOztJQUVBO1FBQ0ksWUFBWTtJQUNoQjtBQUNKOztBQVJBO0lBQ0k7UUFDSSxRQUFRO0lBQ1o7O0lBRUE7UUFDSSxZQUFZO0lBQ2hCO0FBQ0o7O0FBRUE7SUFDSSwyQkFBMkI7QUFDL0IiLCJmaWxlIjoic3JjL2FwcC9jb21tb24vY3VzdG9tLWNvbXAvcHJvZ3Jlc3MtYmFyL3Byb2dyZXNzLWJhci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmxvYWRpbmctYmFye1xuICAgIGhlaWdodDogMjBweDtcbiAgICB3aWR0aDogMzAwcHg7XG4gICAgbWFyZ2luOiAxcmVtO1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHJnYigwLCAwLCAwKTtcbn1cblxuLmxvYWRpbmctcHJvZ3Jlc3N7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICAgIHdpZHRoOiAwcHg7XG4gICAgYW5pbWF0aW9uOiBwcm9ncmVzcy0xIDJzIGluZmluaXRlIDtcbn1cblxuQGtleWZyYW1lcyBwcm9ncmVzcy0xIHtcbiAgICAwJXtcbiAgICAgICAgd2lkdGg6IDA7XG4gICAgfVxuXG4gICAgMTAwJXtcbiAgICAgICAgd2lkdGg6IDI5NnB4O1xuICAgIH1cbn1cblxuOmhvc3R7XG4gICAgYm9yZGVyOiAxcHggc29saWQgZ2FpbnNib3JvO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -1801,7 +1840,7 @@ var highlightPageNum = Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["
     Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["state"])('unselected', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({
         border: '1px solid blue',
         backgroundColor: 'white',
-        padding: '6px',
+        padding: '0.5rem',
         transform: 'scale(1)'
     })),
     Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["state"])('selected', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({
@@ -1815,7 +1854,7 @@ var highlightPageNum = Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["
         Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('0.2s', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ backgroundColor: 'rgb(231, 228, 210)', transform: 'translateX(-20px) scale(2)' })),
         Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('0.2s', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'translateY(-20px) scale(1.5)' })),
         Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('0.2s', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ backgroundColor: 'rgb(231, 228, 210)', transform: 'translateX(20px) scale(2)' })),
-        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('1s', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'scale(5)' }))
+        Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('1s', Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["style"])({ transform: 'scale(2)' }))
     ])
 ]);
 var div_trigger = Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["trigger"])('divTrigger', [
@@ -1883,6 +1922,22 @@ var routingAminTriggerGoUp = Object(_angular_animations__WEBPACK_IMPORTED_MODULE
         Object(_angular_animations__WEBPACK_IMPORTED_MODULE_1__["animate"])('0.5s')
     ])
 ]);
+
+
+/***/ }),
+
+/***/ "./src/app/common/util.ts":
+/*!********************************!*\
+  !*** ./src/app/common/util.ts ***!
+  \********************************/
+/*! exports provided: hostUrl */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hostUrl", function() { return hostUrl; });
+var hostUrl = 'https://mean-backend-05-18-1991.herokuapp.com';
+//export const hostUrl =  'http://localhost:5000' 
 
 
 /***/ }),
@@ -2163,7 +2218,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-form-field>\n    <mat-select placeholder=\"Select report\">\n      <mat-option>POC Report</mat-option>\n      <mat-option>Flow Analysis Reports</mat-option>\n      <mat-option>Rebalance Report</mat-option>\n    </mat-select>\n</mat-form-field>\n"
+module.exports = "<div class=\"jumbotron\">\n\n<mat-form-field>\n    <mat-select placeholder=\"Select report\">\n      <mat-option>Report 1</mat-option>\n      <mat-option>Report 2</mat-option>\n      <mat-option>Reoirt 3</mat-option>\n    </mat-select>\n</mat-form-field>\n\n</div>\n"
 
 /***/ }),
 
@@ -2423,6 +2478,17 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 
 module.exports = __webpack_require__(/*! /Users/lekhrajdinkar/Documents/GitHub/MEAN/src/main.ts */"./src/main.ts");
 
+
+/***/ }),
+
+/***/ 1:
+/*!********************!*\
+  !*** ws (ignored) ***!
+  \********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* (ignored) */
 
 /***/ })
 

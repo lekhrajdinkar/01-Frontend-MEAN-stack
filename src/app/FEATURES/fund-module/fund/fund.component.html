@@ -1,27 +1,28 @@
-<div  (click)="onSimpleClick()">
+<div  (click)="onSimpleClick()" class="border border-grey p-2">
 
 <mat-card-header>
     <mat-card-title>
-        <p class="badge badge-warning text-wrap"> Order Id : {{fund._id}}</p>
+        <p class="display-8"> Order Id : {{fund._id}}</p>
         <div [@divTrigger]="clickInfo"></div>
     </mat-card-title>
 </mat-card-header>
-
+<mat-divider></mat-divider>
 <!-- <img mat-card-image [src]="course.iconUrl"> -->
 
 <div class="row">
-    <div class="col col-9">
+    <div class="col mt-2">
         <mat-card-content>
-            <p class="text-muted">Abbreviation: {{fund.abbr}}</p>
-            <p class="text-muted">Created by: {{fund.created_by}}</p>
+            <p class="text-primary border border-grey p-1 m-1">Abbreviation: {{fund.abbr}}</p>
+            <p class="text-primary border border-grey p-1 m-1">Created by: {{fund.created_by}}</p>
      </mat-card-content>
     </div>
 
-    <div class="col col-3">
+    <div class="col">
             <mat-card-actions>
-                    <button mat-button class="mat-raised-button mat-primary" 
-                    class="view-button"
-                    [routerLink]="['/fund-module/get-all', fund._id]" ><h6 class="mt-2">VIEW</h6></button>
+                    <div class="btn-group-sm" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary view-button" [routerLink]="['/fund-module/get-all', fund._id]">View</button>
+                        <button type="button" class="btn btn-danger" [routerLink]="['/fund-module/edit', fund._id]">Edit</button>
+                    </div>
             </mat-card-actions> 
     </div>
 </div>

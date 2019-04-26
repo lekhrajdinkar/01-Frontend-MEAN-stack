@@ -1,14 +1,14 @@
 
 <div *ngIf='!isProgress' class="m-4">
 {{fof_num}}
-<span *ngIf='noUFflag' class="badge badge-pill badge-light">NO data Found</span>
+<!-- <span *ngIf='noUFflag' class="badge badge-pill badge-light">NO data Found</span> -->
 
 
 
     <mat-tab-group>
         <mat-tab [label]="[uf.num]" *ngFor="let uf of underlyingFunds"> 
             <div>
-                <table class="table table-dark m-4">
+                <table class="table table-sm table-dark table-striped table-bordered table-hover m-4">
                     <tr *ngFor="let e of (uf | keyvalue) ; even as isEven">
                         <td class="text text-left">{{e.key| uppercase}}</td> <td class="text text-left">{{e.value}}</td>
                     </tr>

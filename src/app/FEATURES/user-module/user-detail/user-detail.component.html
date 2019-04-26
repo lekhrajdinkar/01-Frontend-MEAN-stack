@@ -1,45 +1,41 @@
 <div class="m-2 text text-primary text-center "> 1.1 Users details Component (Presentational)</div>
 <mat-divider></mat-divider>
 
-<mat-card class="add-fund-card m-4">
 
-  <mat-card-title>User Details</mat-card-title>
-  <mat-divider></mat-divider>
+<div class="box1"></div>
+<div class="d-flex flex-column border border-primary">
 
-  <mat-card-content>
-    <div class="row">
-      <div class="col">
-        index : <span class="badge badge-info" [@compBumpNoState]> {{ index}}</span>
-      </div>
-    </div>
-  </mat-card-content>
+      <mat-card class="add-fund-card m-4">
+        <mat-card-title>User Details</mat-card-title>
+        <mat-divider></mat-divider>
 
-  <mat-card-title>Actvity histories</mat-card-title>
-  <mat-divider></mat-divider>
-  <mat-card-content>
-    <div class="row">
-      <div class="col">
-          last login : 
-          <span class="ml-2 badge badge-success">online</span>
-      </div>
-    </div>
-  </mat-card-content>
+        <mat-card-content>
+          index : <span class="badge badge-info" [@compBumpNoState]> {{ index}}</span>
+        </mat-card-content>
+      </mat-card>
+   
 
-  <mat-card-title>Edit/delete user Details</mat-card-title>
-  <mat-divider></mat-divider>
-  <mat-card-content>
-    <div class="row">
-      <div class="col">
-          <button mat-mini-fab color="warn">delete</button>
-      </div>
-    </div>
-    
-  </mat-card-content>
+      <mat-card class="add-fund-card m-4">
+        <mat-card-title>JIRA report</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
 
- </mat-card>
+           <div style="width: 25%;">
+                <p-chart type="doughnut" [data]="data"></p-chart>
+           </div>
+        </mat-card-content>
+      </mat-card>
+ 
 
-<!-- <mat-tree>
-  <mat-tree-node> parent node </mat-tree-node>
-  <mat-tree-node> -- child node1 </mat-tree-node>
-  <mat-tree-node> -- child node2 </mat-tree-node>
-</mat-tree> -->
+
+
+      <mat-card class="add-fund-card m-4">
+        <mat-card-title>Edit/delete user Details</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+
+          <button color="warn" class="btn btn-danger mt-4">delete</button>
+        </mat-card-content>
+      </mat-card>
+
+</div>

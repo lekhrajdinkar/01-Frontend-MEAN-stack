@@ -1,5 +1,66 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["FEATURES-user-module-user-module"],{
 
+/***/ "./src/app/FEATURES/user-module/alert-user/alert-user.component.css":
+/*!**************************************************************************!*\
+  !*** ./src/app/FEATURES/user-module/alert-user/alert-user.component.css ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL0ZFQVRVUkVTL3VzZXItbW9kdWxlL2FsZXJ0LXVzZXIvYWxlcnQtdXNlci5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/FEATURES/user-module/alert-user/alert-user.component.html":
+/*!***************************************************************************!*\
+  !*** ./src/app/FEATURES/user-module/alert-user/alert-user.component.html ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1> About MEAN STACK tool</h1>\n\n<mat-dialog-content>\nVersion : {{passedData.version}}\n<p> Demo application </p>\n<p> Developer : Lekhraj Dinkar </p>\n</mat-dialog-content>\n<mat-divider></mat-divider>\n<mat-dialog-actions>\n  <button mat-raised-button color=\"accent\"[mat-dialog-close]=\"true\">Close</button>\n</mat-dialog-actions>`\n"
+
+/***/ }),
+
+/***/ "./src/app/FEATURES/user-module/alert-user/alert-user.component.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/FEATURES/user-module/alert-user/alert-user.component.ts ***!
+  \*************************************************************************/
+/*! exports provided: AlertUserComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlertUserComponent", function() { return AlertUserComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+
+
+
+var AlertUserComponent = /** @class */ (function () {
+    function AlertUserComponent(passedData) {
+        this.passedData = passedData;
+        console.log('AboutComponent contstor called', passedData);
+    }
+    AlertUserComponent.prototype.ngOnInit = function () {
+    };
+    AlertUserComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-alert-user',
+            template: __webpack_require__(/*! ./alert-user.component.html */ "./src/app/FEATURES/user-module/alert-user/alert-user.component.html"),
+            styles: [__webpack_require__(/*! ./alert-user.component.css */ "./src/app/FEATURES/user-module/alert-user/alert-user.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](0, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object])
+    ], AlertUserComponent);
+    return AlertUserComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/FEATURES/user-module/org-chart/data.ts":
 /*!********************************************************!*\
   !*** ./src/app/FEATURES/user-module/org-chart/data.ts ***!
@@ -182,7 +243,7 @@ var UserAddComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ":host{\n    position : fixed;\n    width: 100%;\n    /* margin-right: 50px;\n    display: block; */\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvdXNlci1tb2R1bGUvdXNlci1kZXRhaWwvdXNlci1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGdCQUFnQjtJQUNoQixXQUFXO0lBQ1g7cUJBQ2lCO0FBQ3JCIiwiZmlsZSI6InNyYy9hcHAvRkVBVFVSRVMvdXNlci1tb2R1bGUvdXNlci1kZXRhaWwvdXNlci1kZXRhaWwuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIjpob3N0e1xuICAgIHBvc2l0aW9uIDogZml4ZWQ7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgLyogbWFyZ2luLXJpZ2h0OiA1MHB4O1xuICAgIGRpc3BsYXk6IGJsb2NrOyAqL1xufSJdfQ== */"
+module.exports = ":host{\n    position : -webkit-sticky;\n    position : sticky;\n    width: 50%;\n   \n    right: 20px;\n}\n\n\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvRkVBVFVSRVMvdXNlci1tb2R1bGUvdXNlci1kZXRhaWwvdXNlci1kZXRhaWwuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLHlCQUFpQjtJQUFqQixpQkFBaUI7SUFDakIsVUFBVTs7SUFFVixXQUFXO0FBQ2YiLCJmaWxlIjoic3JjL2FwcC9GRUFUVVJFUy91c2VyLW1vZHVsZS91c2VyLWRldGFpbC91c2VyLWRldGFpbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiOmhvc3R7XG4gICAgcG9zaXRpb24gOiBzdGlja3k7XG4gICAgd2lkdGg6IDUwJTtcbiAgIFxuICAgIHJpZ2h0OiAyMHB4O1xufVxuXG5cbiJdfQ== */"
 
 /***/ }),
 
@@ -193,7 +254,7 @@ module.exports = ":host{\n    position : fixed;\n    width: 100%;\n    /* margin
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"m-2 text text-primary text-center \"> 1.1 Users details Component (Presentational)</div>\n<mat-divider></mat-divider>\n\n<mat-card class=\"add-fund-card m-4\">\n\n  <mat-card-title>User Details</mat-card-title>\n  <mat-divider></mat-divider>\n\n  <mat-card-content>\n    <div class=\"row\">\n      <div class=\"col\">\n        index : <span class=\"badge badge-info\" [@compBumpNoState]> {{ index}}</span>\n      </div>\n    </div>\n  </mat-card-content>\n\n  <mat-card-title>Actvity histories</mat-card-title>\n  <mat-divider></mat-divider>\n  <mat-card-content>\n    <div class=\"row\">\n      <div class=\"col\">\n          last login : \n          <span class=\"ml-2 badge badge-success\">online</span>\n      </div>\n    </div>\n  </mat-card-content>\n\n  <mat-card-title>Edit/delete user Details</mat-card-title>\n  <mat-divider></mat-divider>\n  <mat-card-content>\n    <div class=\"row\">\n      <div class=\"col\">\n          <button mat-mini-fab color=\"warn\">delete</button>\n      </div>\n    </div>\n    \n  </mat-card-content>\n\n </mat-card>\n\n<!-- <mat-tree>\n  <mat-tree-node> parent node </mat-tree-node>\n  <mat-tree-node> -- child node1 </mat-tree-node>\n  <mat-tree-node> -- child node2 </mat-tree-node>\n</mat-tree> -->"
+module.exports = "<div class=\"m-2 text text-primary text-center \"> 1.1 Users details Component (Presentational)</div>\n<mat-divider></mat-divider>\n\n\n<div class=\"box1\"></div>\n<div class=\"d-flex flex-column border border-primary\">\n\n      <mat-card class=\"add-fund-card m-4\">\n        <mat-card-title>User Details</mat-card-title>\n        <mat-divider></mat-divider>\n\n        <mat-card-content>\n          index : <span class=\"badge badge-info\" [@compBumpNoState]> {{ index}}</span>\n        </mat-card-content>\n      </mat-card>\n   \n\n      <mat-card class=\"add-fund-card m-4\">\n        <mat-card-title>JIRA report</mat-card-title>\n        <mat-divider></mat-divider>\n        <mat-card-content>\n\n           <div style=\"width: 25%;\">\n                <p-chart type=\"doughnut\" [data]=\"data\"></p-chart>\n           </div>\n        </mat-card-content>\n      </mat-card>\n \n\n\n\n      <mat-card class=\"add-fund-card m-4\">\n        <mat-card-title>Edit/delete user Details</mat-card-title>\n        <mat-divider></mat-divider>\n        <mat-card-content>\n\n          <button color=\"warn\" class=\"btn btn-danger mt-4\">delete</button>\n        </mat-card-content>\n      </mat-card>\n\n</div>"
 
 /***/ }),
 
@@ -223,7 +284,49 @@ var UserDetailComponent = /** @class */ (function () {
     }
     UserDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.activatedRoute.params.subscribe(function (params) { _this.index = params['index']; });
+        this.activatedRoute.params.subscribe(function (params) {
+            _this.index = params['index'];
+            if (_this.index == 0) {
+                _this.data = {
+                    labels: ['Analysis', 'Coding', 'Meeting'],
+                    datasets: [{
+                            data: [30, 50, 20],
+                            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+                            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+                        }]
+                };
+            }
+            if (_this.index == 1) {
+                _this.data = {
+                    labels: ['Analysis', 'Coding', 'Meeting'],
+                    datasets: [{
+                            data: [20, 40, 40],
+                            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+                            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+                        }]
+                };
+            }
+            if (_this.index == 2) {
+                _this.data = {
+                    labels: ['Analysis', 'Coding', 'Meeting'],
+                    datasets: [{
+                            data: [10, 50, 40],
+                            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+                            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+                        }]
+                };
+            }
+            if (_this.index == 4) {
+                _this.data = {
+                    labels: ['Analysis', 'Coding', 'Meeting'],
+                    datasets: [{
+                            data: [0, 50, 50],
+                            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+                            hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+                        }]
+                };
+            }
+        });
     };
     UserDetailComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -643,6 +746,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var _user_Reducer__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./user.Reducer */ "./src/app/FEATURES/user-module/user.Reducer.ts");
 /* harmony import */ var _org_chart_org_chart_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./org-chart/org-chart.component */ "./src/app/FEATURES/user-module/org-chart/org-chart.component.ts");
+/* harmony import */ var _alert_user_alert_user_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./alert-user/alert-user.component */ "./src/app/FEATURES/user-module/alert-user/alert-user.component.ts");
+/* harmony import */ var src_app_ngprime_module__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! src/app/ngprime.module */ "./src/app/ngprime.module.ts");
+
+
 
 
 
@@ -667,7 +774,7 @@ var UserModule = /** @class */ (function () {
     }
     UserModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-            declarations: [_user_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"], _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_4__["UserListComponent"], _user_add_user_add_component__WEBPACK_IMPORTED_MODULE_5__["UserAddComponent"], _user_detail_user_detail_component__WEBPACK_IMPORTED_MODULE_7__["UserDetailComponent"], _user_list_user_list_item_user_list_item_component__WEBPACK_IMPORTED_MODULE_13__["UserListItemComponent"], _org_chart_org_chart_component__WEBPACK_IMPORTED_MODULE_18__["OrgChartComponent"]],
+            declarations: [_user_user_component__WEBPACK_IMPORTED_MODULE_3__["UserComponent"], _user_list_user_list_component__WEBPACK_IMPORTED_MODULE_4__["UserListComponent"], _user_add_user_add_component__WEBPACK_IMPORTED_MODULE_5__["UserAddComponent"], _user_detail_user_detail_component__WEBPACK_IMPORTED_MODULE_7__["UserDetailComponent"], _user_list_user_list_item_user_list_item_component__WEBPACK_IMPORTED_MODULE_13__["UserListItemComponent"], _org_chart_org_chart_component__WEBPACK_IMPORTED_MODULE_18__["OrgChartComponent"], _alert_user_alert_user_component__WEBPACK_IMPORTED_MODULE_19__["AlertUserComponent"]],
             imports: [
                 _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
                 src_app_material_module__WEBPACK_IMPORTED_MODULE_8__["MaterialModule"],
@@ -675,7 +782,7 @@ var UserModule = /** @class */ (function () {
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClientModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_11__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_11__["ReactiveFormsModule"],
                 _user_module_routing__WEBPACK_IMPORTED_MODULE_12__["UserModuleRouting"],
-                src_app_common_common_module__WEBPACK_IMPORTED_MODULE_15__["TactCommonModule"],
+                src_app_common_common_module__WEBPACK_IMPORTED_MODULE_15__["TactCommonModule"], src_app_ngprime_module__WEBPACK_IMPORTED_MODULE_20__["PrimeNGModule"],
                 _ngrx_store__WEBPACK_IMPORTED_MODULE_16__["StoreModule"].forFeature('userState', _user_Reducer__WEBPACK_IMPORTED_MODULE_17__["userReducer"]),
             ],
             providers: [_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"], _user_resolver__WEBPACK_IMPORTED_MODULE_14__["UserResolver"]]
@@ -733,6 +840,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_SERVICE_auth_service_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/SERVICE/auth-service.service */ "./src/app/SERVICE/auth-service.service.ts");
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm5/store.js");
 /* harmony import */ var _user_actions__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./user.actions */ "./src/app/FEATURES/user-module/user.actions.ts");
+/* harmony import */ var src_app_common_util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/common/util */ "./src/app/common/util.ts");
+
 
 
 
@@ -746,7 +855,7 @@ var UserService = /** @class */ (function () {
         this.http = http;
         this.authSrv = authSrv;
         this.store = store;
-        this.host = 'https://mean-backend-05-18-1991.herokuapp.com';
+        this.host = src_app_common_util__WEBPACK_IMPORTED_MODULE_8__["hostUrl"];
     }
     UserService.prototype.getAllHardcodedUser = function () {
         return _user_list_user_list_item_uses_data__WEBPACK_IMPORTED_MODULE_2__["usersData"];

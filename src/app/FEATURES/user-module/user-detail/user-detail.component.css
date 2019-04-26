@@ -1,6 +1,8 @@
 :host{
-    position : fixed;
-    width: 100%;
-    /* margin-right: 50px;
-    display: block; */
+    position : sticky;
+    width: 50%;
+   
+    right: 20px;
 }
+
+

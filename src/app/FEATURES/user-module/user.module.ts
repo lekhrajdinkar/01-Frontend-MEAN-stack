@@ -16,9 +16,11 @@ import { TactCommonModule } from 'src/app/common/common.module';
 import { StoreModule } from '@ngrx/store';
 import { userReducer } from './user.Reducer';
 import { OrgChartComponent } from './org-chart/org-chart.component';
+import { AlertUserComponent } from './alert-user/alert-user.component';
+import { PrimeNGModule } from 'src/app/ngprime.module';
 
 @NgModule({
-  declarations: [UserComponent, UserListComponent, UserAddComponent, UserDetailComponent, UserListItemComponent, OrgChartComponent],
+  declarations: [UserComponent, UserListComponent, UserAddComponent, UserDetailComponent, UserListItemComponent, OrgChartComponent, AlertUserComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -26,7 +28,7 @@ import { OrgChartComponent } from './org-chart/org-chart.component';
     HttpClientModule,
     FormsModule,ReactiveFormsModule,
     UserModuleRouting,
-    TactCommonModule,
+    TactCommonModule, PrimeNGModule,
     StoreModule.forFeature('userState', userReducer), //step -3 register Reducer => users will be property of tactState
   ],
   providers :[UserService, UserResolver]
