@@ -9,6 +9,7 @@ import { ErrorComponent } from './error/error.component';
 import { OrderMgtComponent } from './FEATURES/fund-module/order-mgt/order-mgt.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthGaurdGuard } from './auth-gaurd.guard';
+import { NewHomeComponent } from './FEATURES/home-module/home/home.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   
   //old routes
   { path: 'home', component: OrderMgtComponent },
+  { path: 'newhome', component: NewHomeComponent },
   { path: 'fundmtn', component: FundMaintenanceComponent },
   { path: 'ordermgt', component: OrderMgtComponent },
   { path: 'rpt', component: ReportComponent  },

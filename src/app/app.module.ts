@@ -26,6 +26,7 @@ import { AboutComponent } from './common/about.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { hostUrl } from './common/util';
+import { HomeModuleModule } from './FEATURES/home-module/home-module.module';
 
 
 const config: SocketIoConfig = { url: hostUrl, options: {} };
@@ -48,6 +49,7 @@ const config: SocketIoConfig = { url: hostUrl, options: {} };
 
     MaterialModule, PrimeNGModule,
     FundModule, //routing order matter, load it  FundModule(fund.routing.module) before AppRoutingModule ***
+    HomeModuleModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     TactCommonModule,
