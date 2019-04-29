@@ -1,16 +1,16 @@
 #container{
     display: flex;
-    flex-direction: row; flex-wrap: wrap;
+    flex-direction: row; flex-wrap: wrap; /* shorthand : flex-flow: row wrap */
     
     justify-content:flex-end;
-    align-items: center; 
+    align-items: center; /* default value is stretched */
     /* align-content: space-around; */
 
     /* border: 1px solid grey; */
     margin: 20px;
     padding: 50px;
     background-color: azure;
-    height: 90%;
+    height: 50%;
     border-radius: 10px;
     
 
@@ -29,10 +29,106 @@
     min-width: 100px;
 }
 
-.item-1{ align-self: center; flex:3 ; flex-grow: 1}
+.item-1{ align-self: center; flex:3 ; flex-grow: 1,}
 
 .item-2{  align-self: center; flex:2; flex-grow: 4 ; flex-shrink: 0;}
 
 .item-3{ align-self: center; flex:1; flex-grow: 2}
+
+/* =======GRID========== */
+
+#container-grid{
+    display: grid;
+    margin: 10px;
+    border: 2px solid blue;
+    background-color: rgb(78, 82, 82);
+    grid-template-columns: 200px auto;
+    grid-template-rows: 5rem auto 25%;
+    
+}
+
+.grid-item{
+padding: 10px;
+border: 2px solid whitesmoke;
+background-color: rgb(212, 240, 240);
+margin: 10px;
+}
+
+.ge1{
+    grid-column-start: 1; grid-column-end: 3
+}
+
+/* =======grid 2========= */
+#container-grid2{
+    display: grid;
+    margin: 10px;
+    border: 2px solid blue;
+    background-color: rgb(255, 255, 255);
+    grid-template-columns: repeat(5,20%);
+    grid-template-rows: fit-content(5rem) minmax(200px, 500px) 25% 10% [r-5] 10% [r-6] 10%;
+
+    justify-items: stretch; /* default*/
+    justify-items: center; 
+
+    justify-content: center; /* whole cont*/
+    align-content: center; /* whole cont*/
+    
+    /* grid-gap: 10px 20px; */
+
+    grid-template-areas: 
+    " h h h h h"
+    ". . . . . "
+    ". . . . . "
+    ". . . . . "
+    "a a . . . "
+    "a1 a1 . . . "
+}
+
+.grid-item2{
+padding: 10px;
+border: 2px solid whitesmoke;
+background-color: rgb(212, 240, 240);
+/* box-sizing: content-box; */
+margin: px;
+}
+
+
+.ge2-0{
+    grid-column-start: 1; grid-column-end: 6
+}
+
+.ge2-1{
+    /* grid-row-start: 3; */
+    grid-column-start: 1; grid-column-end: 6;
+    z-index: 100;
+    background-color: rgb(188, 247, 199);
+}
+
+.ge2-2{
+    /* grid-column-start: 2; grid-column-end: 6; */
+    grid-column-start: 2; grid-column-end: span 4;
+
+}
+.ge2-3{
+    grid-row-start: 3;
+    grid-column-start: 1; grid-column-end: 6;
+    background-color: rgb(250, 229, 199);
+}
+
+/* short hand- grid area */
+.ge2-4{
+   /* grid-area: r-5/2/span 2/5 ;   shorthand - rs cs re ce */
+   grid-row: r-5/span 2;
+   grid-column: 3/4;
+   align-self: stretch;
+   justify-self: stretch;
+}
+
+.ge2-5{
+    grid-area: a; 
+    background-color: rgb(235, 199, 250);
+}
+
+
 
 
